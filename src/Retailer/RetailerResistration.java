@@ -105,6 +105,11 @@ public class RetailerResistration extends javax.swing.JFrame {
         jLabel11.setText("Whether primises or godown has legal possesion by applicant");
 
         jButton1.setText("NEXT");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Reset");
 
@@ -224,6 +229,13 @@ public class RetailerResistration extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        RetailerRegistration_2 retailerRegistration_2=new RetailerRegistration_2();
+        retailerRegistration_2.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
