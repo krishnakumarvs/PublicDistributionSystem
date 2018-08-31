@@ -152,6 +152,11 @@ public class Registration extends javax.swing.JFrame {
 
         jButton2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jButton2.setText("CANCEL");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel16.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
         jLabel16.setText("Please enter your details....");
@@ -317,8 +322,15 @@ public class Registration extends javax.swing.JFrame {
         Registration_Next registration_next=new Registration_Next();
         registration_next.setVisible(true);
         
-        
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        LoginCustomer loginCustomer=new LoginCustomer();
+        loginCustomer.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
