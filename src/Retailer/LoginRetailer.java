@@ -65,7 +65,7 @@ public class LoginRetailer extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Reset");
+        jButton2.setText("Clear");
 
         jLabel5.setFont(new java.awt.Font("Times New Roman", 2, 14)); // NOI18N
         jLabel5.setText("New User");

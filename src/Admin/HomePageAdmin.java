@@ -6,6 +6,8 @@
 
 package Admin;
 
+import pds.HomePage;
+
 /**
  *
  * @author USER
@@ -31,7 +33,6 @@ public class HomePageAdmin extends javax.swing.JFrame {
         jMenu9 = new javax.swing.JMenu();
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu8 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
@@ -57,14 +58,6 @@ public class HomePageAdmin extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jMenu3.setText("File");
-
-        jMenuItem1.setText("Add Category");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        jMenu3.add(jMenuItem1);
 
         jMenuItem2.setText("Add Item");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
@@ -216,13 +209,6 @@ public class HomePageAdmin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
-        AddCategory addCategory=new AddCategory();
-        addCategory.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
         AddItem addItem=new AddItem();
@@ -312,8 +298,8 @@ public class HomePageAdmin extends javax.swing.JFrame {
 
     private void jMenu7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu7MouseClicked
         // TODO add your handling code here:
-         LoginAdmin loginAdmin=new LoginAdmin();
-        loginAdmin.setVisible(true);
+         HomePage homePage=new HomePage();
+         homePage.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jMenu7MouseClicked
 
@@ -364,7 +350,6 @@ public class HomePageAdmin extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu8;
     private javax.swing.JMenu jMenu9;
     private javax.swing.JMenuBar jMenuBar2;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem14;
