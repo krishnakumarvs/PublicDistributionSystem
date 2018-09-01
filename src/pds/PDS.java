@@ -6,7 +6,9 @@
 
 package pds;
 
-import Customer.Registration;
+
+
+
 
 /**
  *
@@ -19,9 +21,9 @@ public class PDS {
      */
     public static void main(String[] args)
     {
-        
-        Registration r=new Registration();
-        r.setVisible(true);
+        HomePage homePage=new HomePage();
+        homePage.setVisible(true);
+             
     }
     
 }

@@ -77,6 +77,11 @@ public class EditDetails extends javax.swing.JFrame {
         jLabel9.setText("[ If changed ]");
 
         jButton2.setText("Submit");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Reset");
 
@@ -122,15 +127,12 @@ public class EditDetails extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(183, 183, 183)
                                 .addComponent(jLabel9))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addGap(430, 430, 430))
+                    .addComponent(jLabel7)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(179, 179, 179)
                         .addComponent(jButton2)
                         .addGap(79, 79, 79)
-                        .addComponent(jButton3)
-                        .addGap(133, 133, 133)))
+                        .addComponent(jButton3)))
                 .addContainerGap(206, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -182,6 +184,13 @@ public class EditDetails extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        HomePageCustomer homePageCustomer=new HomePageCustomer();
+        homePageCustomer.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

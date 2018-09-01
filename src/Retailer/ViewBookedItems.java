@@ -83,6 +83,11 @@ public class ViewBookedItems extends javax.swing.JFrame {
         jButton1.setText("EDIT");
 
         jButton5.setText("Make Payment");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Remove");
 
@@ -193,6 +198,13 @@ public class ViewBookedItems extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        PaymentRetailer paymentRetailer=new PaymentRetailer();
+        paymentRetailer.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments

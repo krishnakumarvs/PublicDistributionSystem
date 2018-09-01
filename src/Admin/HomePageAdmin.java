@@ -46,8 +46,9 @@ public class HomePageAdmin extends javax.swing.JFrame {
         jMenuItem10 = new javax.swing.JMenuItem();
         jMenuItem11 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
-        jMenuItem12 = new javax.swing.JMenuItem();
-        jMenuItem13 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem14 = new javax.swing.JMenuItem();
+        jMenu10 = new javax.swing.JMenu();
         jMenu1 = new javax.swing.JMenu();
         jMenu7 = new javax.swing.JMenu();
 
@@ -123,7 +124,7 @@ public class HomePageAdmin extends javax.swing.JFrame {
 
         jMenuBar2.add(jMenu5);
 
-        jMenu4.setText("Edit Details");
+        jMenu4.setText("Customer Applications");
 
         jMenuItem8.setText("Add new members");
         jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
@@ -161,18 +162,37 @@ public class HomePageAdmin extends javax.swing.JFrame {
 
         jMenu6.setText("View");
 
-        jMenuItem12.setText("Customer ");
-        jMenu6.add(jMenuItem12);
+        jMenu2.setText("Customer");
 
-        jMenuItem13.setText("Retailer");
-        jMenu6.add(jMenuItem13);
+        jMenuItem14.setText("jMenuItem14");
+        jMenu2.add(jMenuItem14);
+
+        jMenu6.add(jMenu2);
+
+        jMenu10.setText("Retailer");
+        jMenu6.add(jMenu10);
 
         jMenuBar2.add(jMenu6);
 
         jMenu1.setText("Complaints");
+        jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu1MouseClicked(evt);
+            }
+        });
+        jMenu1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu1ActionPerformed(evt);
+            }
+        });
         jMenuBar2.add(jMenu1);
 
         jMenu7.setText("Logout");
+        jMenu7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu7MouseClicked(evt);
+            }
+        });
         jMenu7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenu7ActionPerformed(evt);
@@ -240,9 +260,7 @@ public class HomePageAdmin extends javax.swing.JFrame {
 
     private void jMenu7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu7ActionPerformed
         // TODO add your handling code here:
-        LoginAdmin loginAdmin=new LoginAdmin();
-        loginAdmin.setVisible(true);
-        this.dispose();
+      
     }//GEN-LAST:event_jMenu7ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
@@ -279,6 +297,25 @@ public class HomePageAdmin extends javax.swing.JFrame {
         customerEditDetails.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jMenuItem11ActionPerformed
+
+    private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jMenu1ActionPerformed
+
+    private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
+        // TODO add your handling code here:
+        ViewComplaints viewComplaints=new ViewComplaints();
+        viewComplaints.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jMenu1MouseClicked
+
+    private void jMenu7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu7MouseClicked
+        // TODO add your handling code here:
+         LoginAdmin loginAdmin=new LoginAdmin();
+        loginAdmin.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jMenu7MouseClicked
 
     /**
      * @param args the command line arguments
@@ -317,6 +354,8 @@ public class HomePageAdmin extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu10;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
@@ -328,8 +367,7 @@ public class HomePageAdmin extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
-    private javax.swing.JMenuItem jMenuItem12;
-    private javax.swing.JMenuItem jMenuItem13;
+    private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;

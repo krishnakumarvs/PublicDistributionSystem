@@ -29,13 +29,11 @@ public class HomePageCustomer extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenuBar2 = new javax.swing.JMenuBar();
-        jMenu23 = new javax.swing.JMenu();
         jMenu24 = new javax.swing.JMenu();
         jMenu30 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu25 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
@@ -50,14 +48,10 @@ public class HomePageCustomer extends javax.swing.JFrame {
         jMenuItem12 = new javax.swing.JMenuItem();
         jMenuItem13 = new javax.swing.JMenuItem();
         jMenuItem14 = new javax.swing.JMenuItem();
-        jMenuItem15 = new javax.swing.JMenuItem();
         jMenu28 = new javax.swing.JMenu();
         jMenu29 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jMenu23.setText("Home");
-        jMenuBar2.add(jMenu23);
 
         jMenu24.setText("Rules");
         jMenuBar2.add(jMenu24);
@@ -83,14 +77,6 @@ public class HomePageCustomer extends javax.swing.JFrame {
         jMenuBar2.add(jMenu30);
 
         jMenu25.setText("Order");
-
-        jMenuItem1.setText("New");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        jMenu25.add(jMenuItem1);
 
         jMenuItem4.setText("Booked");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
@@ -201,14 +187,6 @@ public class HomePageCustomer extends javax.swing.JFrame {
         });
         jMenu27.add(jMenuItem14);
 
-        jMenuItem15.setText("View profile");
-        jMenuItem15.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem15ActionPerformed(evt);
-            }
-        });
-        jMenu27.add(jMenuItem15);
-
         jMenuBar2.add(jMenu27);
 
         jMenu28.setText("Complaints");
@@ -275,27 +253,6 @@ public class HomePageCustomer extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
-        MonthlyItemOrder monthlyItemOrder=new MonthlyItemOrder();
-        monthlyItemOrder.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        // TODO add your handling code here:
-        ViewItemsBooked viewItemsBooked=new ViewItemsBooked();
-        viewItemsBooked.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
-
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        // TODO add your handling code here:
-        DeliveryDetails deliveryDetails=new DeliveryDetails();
-        deliveryDetails.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
-
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         // TODO add your handling code here:
         Payment payment=new Payment();
@@ -352,11 +309,6 @@ public class HomePageCustomer extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jMenuItem14ActionPerformed
 
-    private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_jMenuItem15ActionPerformed
-
     private void jMenu28ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu28ActionPerformed
         // TODO add your handling code here:
        
@@ -392,6 +344,20 @@ public class HomePageCustomer extends javax.swing.JFrame {
         viewCartItems.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jMenu1MouseClicked
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        // TODO add your handling code here:
+        DeliveryDetails deliveryDetails=new DeliveryDetails();
+        deliveryDetails.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        // TODO add your handling code here:
+        ViewCartItems viewCartItems=new ViewCartItems();
+        viewCartItems.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -430,7 +396,6 @@ public class HomePageCustomer extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu23;
     private javax.swing.JMenu jMenu24;
     private javax.swing.JMenu jMenu25;
     private javax.swing.JMenu jMenu26;
@@ -439,13 +404,11 @@ public class HomePageCustomer extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu29;
     private javax.swing.JMenu jMenu30;
     private javax.swing.JMenuBar jMenuBar2;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem14;
-    private javax.swing.JMenuItem jMenuItem15;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;

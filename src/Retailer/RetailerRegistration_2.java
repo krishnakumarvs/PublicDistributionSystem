@@ -73,6 +73,11 @@ public class RetailerRegistration_2 extends javax.swing.JFrame {
         });
 
         jButton3.setText("Submit");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("cancel");
 
@@ -154,6 +159,13 @@ public class RetailerRegistration_2 extends javax.swing.JFrame {
         retailerRegistration.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        LoginRetailer loginRetailer=new LoginRetailer();
+        loginRetailer.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
