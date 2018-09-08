@@ -43,12 +43,36 @@ CREATE TABLE `items` (
   `price_bpl` int(11) DEFAULT NULL,
   `price_ayy` int(11) DEFAULT NULL,
   `price_ayya` int(11) DEFAULT NULL,
-  `price_abc` int(11) DEFAULT NULL,
+  `price_other` int(11) DEFAULT NULL,
   `image` blob,
+  `monthly_item` tinyint(1) DEFAULT '0',
+  `monthly_price_apl` int(11) DEFAULT NULL,
+  `monthly_price_bpl` int(11) DEFAULT NULL,
+  `monthly_price_ayy` int(11) DEFAULT NULL,
+  `monthly_price_ayya` int(11) DEFAULT NULL,
+  `monthly_price_other` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `items` */
+
+/*Table structure for table `member_details` */
+
+DROP TABLE IF EXISTS `member_details`;
+
+CREATE TABLE `member_details` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL,
+  `full_name` varchar(100) DEFAULT NULL,
+  `gender` varchar(10) DEFAULT 'male' COMMENT 'male, female',
+  `age` int(11) DEFAULT NULL,
+  `relation` varchar(50) DEFAULT NULL,
+  `occupation` varchar(100) DEFAULT NULL,
+  `aadhar_num` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `member_details` */
 
 /*Table structure for table `retailer_cart` */
 
@@ -58,6 +82,7 @@ CREATE TABLE `retailer_cart` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `item_id` int(11) DEFAULT NULL,
   `quantity` int(11) DEFAULT NULL,
+  `retailer_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -89,6 +114,7 @@ CREATE TABLE `user_cart` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `item_id` int(11) DEFAULT NULL,
   `quantity` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -133,10 +159,14 @@ CREATE TABLE `user_details` (
   `licence_info` varchar(500) DEFAULT NULL,
   `financial_sound_details` varchar(100) DEFAULT NULL,
   `financial_sound_doc` blob,
+  `approved_status` int(11) DEFAULT '0' COMMENT '0 - not checked, 1- approved, 2 - rejected',
+  `rejected_reason` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 /*Data for the table `user_details` */
+
+insert  into `user_details`(`id`,`name`,`user_type`,`address`,`place`,`district`,`state`,`aadhar_num`,`occupation`,`gender`,`house_num`,`mobile_num`,`dob`,`email`,`taluk`,`place_type`,`annual_income`,`no_of_family_members`,`address_proof_doc`,`age_certificate_doc`,`annual_income_doc`,`aadhaar_doc`,`user_name`,`password`,`retailer_id`,`firm_name_style`,`firm_category`,`premise_address`,`godown_address`,`legal_possession`,`ownership_type`,`licence_info`,`financial_sound_details`,`financial_sound_doc`,`approved_status`,`rejected_reason`) values (1,'rahul','admin',NULL,NULL,NULL,NULL,NULL,NULL,'male',NULL,NULL,NULL,NULL,NULL,'panchayath',NULL,NULL,NULL,NULL,NULL,NULL,'admin','admin',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL);
 
 /*Table structure for table `user_orders` */
 
