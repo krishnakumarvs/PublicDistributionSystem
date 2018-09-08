@@ -1,0 +1,162 @@
+/*
+SQLyog Community v11.24 (32 bit)
+MySQL - 5.5.8 : Database - pds
+*********************************************************************
+*/
+
+/*!40101 SET NAMES utf8 */;
+
+/*!40101 SET SQL_MODE=''*/;
+
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`pds` /*!40100 DEFAULT CHARACTER SET latin1 */;
+
+USE `pds`;
+
+/*Table structure for table `complaints` */
+
+DROP TABLE IF EXISTS `complaints`;
+
+CREATE TABLE `complaints` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `created_user_id` int(11) DEFAULT NULL,
+  `created_user_type` varchar(30) DEFAULT 'customer' COMMENT 'customer,retailer',
+  `description` varchar(1000) DEFAULT NULL,
+  `comments` varchar(1000) DEFAULT NULL,
+  `order_info` varchar(100) DEFAULT NULL,
+  `created_at` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `complaints` */
+
+/*Table structure for table `items` */
+
+DROP TABLE IF EXISTS `items`;
+
+CREATE TABLE `items` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) DEFAULT NULL,
+  `price_apl` int(11) DEFAULT NULL,
+  `price_bpl` int(11) DEFAULT NULL,
+  `price_ayy` int(11) DEFAULT NULL,
+  `price_ayya` int(11) DEFAULT NULL,
+  `price_abc` int(11) DEFAULT NULL,
+  `image` blob,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `items` */
+
+/*Table structure for table `retailer_cart` */
+
+DROP TABLE IF EXISTS `retailer_cart`;
+
+CREATE TABLE `retailer_cart` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `item_id` int(11) DEFAULT NULL,
+  `quantity` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `retailer_cart` */
+
+/*Table structure for table `retailer_orders` */
+
+DROP TABLE IF EXISTS `retailer_orders`;
+
+CREATE TABLE `retailer_orders` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `amount` float DEFAULT NULL,
+  `retailer_id` int(11) DEFAULT NULL,
+  `payment_type` varchar(20) DEFAULT NULL COMMENT 'paytm,tez',
+  `items` varchar(1000) DEFAULT NULL,
+  `no_of_items` int(11) DEFAULT NULL,
+  `date_of_delivery` int(11) DEFAULT NULL,
+  `created_at` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `retailer_orders` */
+
+/*Table structure for table `user_cart` */
+
+DROP TABLE IF EXISTS `user_cart`;
+
+CREATE TABLE `user_cart` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `item_id` int(11) DEFAULT NULL,
+  `quantity` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `user_cart` */
+
+/*Table structure for table `user_details` */
+
+DROP TABLE IF EXISTS `user_details`;
+
+CREATE TABLE `user_details` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) DEFAULT NULL,
+  `user_type` varchar(30) NOT NULL DEFAULT 'customer' COMMENT 'customer,admin,retailer',
+  `address` varchar(100) DEFAULT NULL,
+  `place` varchar(50) DEFAULT NULL,
+  `district` varchar(50) DEFAULT NULL,
+  `state` varchar(50) DEFAULT NULL,
+  `aadhar_num` varchar(50) DEFAULT NULL,
+  `occupation` varchar(50) DEFAULT NULL,
+  `gender` varchar(10) DEFAULT 'male' COMMENT 'male,female',
+  `house_num` varchar(20) DEFAULT NULL,
+  `mobile_num` varchar(10) DEFAULT NULL,
+  `dob` varchar(50) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `taluk` varchar(50) DEFAULT NULL,
+  `place_type` varchar(50) DEFAULT 'panchayath' COMMENT 'panchayath, municipality, corporation',
+  `annual_income` float DEFAULT NULL,
+  `no_of_family_members` int(11) DEFAULT NULL,
+  `address_proof_doc` blob,
+  `age_certificate_doc` blob,
+  `annual_income_doc` blob,
+  `aadhaar_doc` blob,
+  `user_name` varchar(50) DEFAULT NULL,
+  `password` varchar(50) DEFAULT NULL,
+  `retailer_id` int(11) DEFAULT NULL COMMENT 'which retailer the customer belongs to',
+  `firm_name_style` varchar(100) DEFAULT NULL,
+  `firm_category` varchar(30) DEFAULT NULL COMMENT 'ex-service, sc-st, others',
+  `premise_address` varchar(500) DEFAULT NULL,
+  `godown_address` varchar(500) DEFAULT NULL,
+  `legal_possession` varchar(100) DEFAULT NULL,
+  `ownership_type` varchar(50) DEFAULT NULL COMMENT 'sole, coperative, registered, partnership',
+  `licence_info` varchar(500) DEFAULT NULL,
+  `financial_sound_details` varchar(100) DEFAULT NULL,
+  `financial_sound_doc` blob,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `user_details` */
+
+/*Table structure for table `user_orders` */
+
+DROP TABLE IF EXISTS `user_orders`;
+
+CREATE TABLE `user_orders` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `amount` float DEFAULT NULL,
+  `address_of_order` varchar(50) DEFAULT NULL,
+  `payment_type` varchar(20) DEFAULT NULL COMMENT 'paytm,tez',
+  `items` varchar(500) DEFAULT NULL,
+  `no_of_items` int(11) DEFAULT NULL,
+  `date_of_delivery` varchar(100) DEFAULT NULL,
+  `created_at` varchar(100) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `user_orders` */
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
