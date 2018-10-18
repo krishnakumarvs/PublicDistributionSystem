@@ -17,6 +17,7 @@ public class TodaysOrders extends javax.swing.JFrame {
      */
     public TodaysOrders() {
         initComponents();
+         setLocationRelativeTo(null);
     }
 
     /**

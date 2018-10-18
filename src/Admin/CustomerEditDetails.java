@@ -17,6 +17,7 @@ public class CustomerEditDetails extends javax.swing.JFrame {
      */
     public CustomerEditDetails() {
         initComponents();
+         setLocationRelativeTo(null);
     }
 
     /**

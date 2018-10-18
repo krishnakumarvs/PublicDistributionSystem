@@ -6,6 +6,10 @@
 
 package Customer;
 
+import db.Dbcon;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author USER
@@ -17,6 +21,7 @@ public class LoginCustomer extends javax.swing.JFrame {
      */
     public LoginCustomer() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -30,15 +35,16 @@ public class LoginCustomer extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        username_textfield = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        password_field = new javax.swing.JPasswordField();
         jLabel4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel1.setText("Member Login");
@@ -87,8 +93,8 @@ public class LoginCustomer extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
-                            .addComponent(jPasswordField1)))
+                            .addComponent(username_textfield, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
+                            .addComponent(password_field)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(118, 118, 118)
                         .addComponent(jLabel1))
@@ -113,11 +119,11 @@ public class LoginCustomer extends javax.swing.JFrame {
                 .addGap(43, 43, 43)
                 .addComponent(jLabel2)
                 .addGap(1, 1, 1)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(username_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(password_field, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
@@ -148,9 +154,46 @@ public class LoginCustomer extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        HomePageCustomer homePageCustomer=new HomePageCustomer();
+        
+        String password;
+        String username;
+        username=username_textfield.getText();
+        password=password_field.getText();
+        System.out.println(username);
+        System.out.println(password);
+        
+        String query="select * from user_details where user_name='" +  username + "' and password='" + password + "' and user_type='customer' ";
+        System.out.println(query);
+        
+        Dbcon dbcon=new Dbcon();
+        ResultSet rs=dbcon.select(query);//insert();
+        try
+        {
+            String userid;
+            if(rs.next())
+            {
+                userid = rs.getString("id");
+                               
+                HomePageCustomer homePageCustomer=new HomePageCustomer(userid);
+                homePageCustomer.setVisible(true);
+                this.dispose();
+            }
+            else
+            {
+                //System.out.println("Invalid User...");
+               JOptionPane.showMessageDialog(rootPane, "Invalid User..");
+            }
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+        
+        
+        
+       /* HomePageCustomer homePageCustomer=new HomePageCustomer();
         homePageCustomer.setVisible(true);
-        this.dispose();
+        this.dispose();*/
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -179,7 +222,7 @@ public class LoginCustomer extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(LoginCustomer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -196,7 +239,7 @@ public class LoginCustomer extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JPasswordField password_field;
+    private javax.swing.JTextField username_textfield;
     // End of variables declaration//GEN-END:variables
 }

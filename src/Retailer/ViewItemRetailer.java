@@ -17,6 +17,7 @@ public class ViewItemRetailer extends javax.swing.JFrame {
      */
     public ViewItemRetailer() {
         initComponents();
+         setLocationRelativeTo(null);
     }
 
     /**

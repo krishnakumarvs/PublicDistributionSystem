@@ -6,18 +6,31 @@
 
 package Customer;
 
+import db.Dbcon;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author USER
  */
 public class ChangePassword extends javax.swing.JFrame {
-
+    String userid;
     /**
      * Creates new form ChangePassword
      */
-    public ChangePassword() {
+    
+   public ChangePassword() {
         initComponents();
+         //setLocationRelativeTo(null);
     }
+    
+     public ChangePassword(String userid) {
+        initComponents();
+         setLocationRelativeTo(null);
+         this.userid=userid;
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -31,9 +44,9 @@ public class ChangePassword extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jPasswordField2 = new javax.swing.JPasswordField();
-        jPasswordField3 = new javax.swing.JPasswordField();
+        current_pwd_textfield = new javax.swing.JPasswordField();
+        new_pwd_textfield = new javax.swing.JPasswordField();
+        confirm_pwd_textfield = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -69,47 +82,47 @@ public class ChangePassword extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(176, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(124, 124, 124)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jPasswordField1)
-                            .addComponent(jPasswordField2)
-                            .addComponent(jPasswordField3, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(116, 116, 116)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jButton1)
                         .addGap(55, 55, 55)
                         .addComponent(jButton2)
                         .addGap(46, 46, 46)
-                        .addComponent(jButton3)))
-                .addContainerGap(71, Short.MAX_VALUE))
+                        .addComponent(jButton3))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(current_pwd_textfield)
+                            .addComponent(new_pwd_textfield)
+                            .addComponent(confirm_pwd_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(34, 34, 34)))
+                .addGap(160, 160, 160))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(85, 85, 85)
+                .addGap(60, 60, 60)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(current_pwd_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(11, 11, 11)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(new_pwd_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(8, 8, 8)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPasswordField3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
+                .addComponent(confirm_pwd_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2)
                     .addComponent(jButton3))
-                .addContainerGap(113, Short.MAX_VALUE))
+                .addContainerGap(99, Short.MAX_VALUE))
         );
 
         pack();
@@ -117,9 +130,61 @@ public class ChangePassword extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        HomePageCustomer homePageCustomer=new HomePageCustomer();
-        homePageCustomer.setVisible(true);
-        this.dispose();
+        
+        String current_pwd=current_pwd_textfield.getText();
+        String new_pwd=new_pwd_textfield.getText();
+        String confirm_pwd=confirm_pwd_textfield.getText();
+        Dbcon dbcon=new Dbcon();
+        String query1="select password from user_details where id='"+userid+"' and user_type='customer'     `";
+        ResultSet rs1=dbcon.select(query1);
+        String password="";
+            try
+            {
+               
+                if(rs1.next())
+                {
+                 password= rs1.getString("id");
+                }
+                else
+                {
+                //System.out.println("Invalid User...");
+                JOptionPane.showMessageDialog(rootPane, "Invalid query..");
+                }
+                            }
+            catch(Exception e)
+            {
+            System.out.println(e);
+            }
+     if(current_pwd.equals(password))
+     {
+        if(new_pwd.equals(confirm_pwd))
+        {
+            String query="update user_details set password='"+new_pwd+"'";
+            
+            int rs=dbcon.insert(query);
+            if(rs!=0)
+            {
+                JOptionPane.showMessageDialog(rootPane, "Password Successfully changed..");
+                HomePageCustomer homePageCustomer=new HomePageCustomer(userid);
+                homePageCustomer.setVisible(true);
+                this.dispose();
+            }
+            else
+            {
+                System.out.println("failed..");
+            }
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(rootPane, "Password not maching..");
+        }
+        
+     }
+     else
+     {
+         JOptionPane.showMessageDialog(rootPane, "Password not correct..");
+     }
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -165,14 +230,14 @@ public class ChangePassword extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPasswordField confirm_pwd_textfield;
+    private javax.swing.JPasswordField current_pwd_textfield;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JPasswordField jPasswordField2;
-    private javax.swing.JPasswordField jPasswordField3;
+    private javax.swing.JPasswordField new_pwd_textfield;
     // End of variables declaration//GEN-END:variables
 }

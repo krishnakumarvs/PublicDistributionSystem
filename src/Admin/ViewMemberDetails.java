@@ -17,6 +17,7 @@ public class ViewMemberDetails extends javax.swing.JFrame {
      */
     public ViewMemberDetails() {
         initComponents();
+         setLocationRelativeTo(null);
     }
 
     /**

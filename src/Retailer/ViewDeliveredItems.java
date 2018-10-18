@@ -17,6 +17,7 @@ public class ViewDeliveredItems extends javax.swing.JFrame {
      */
     public ViewDeliveredItems() {
         initComponents();
+         setLocationRelativeTo(null);
     }
 
     /**

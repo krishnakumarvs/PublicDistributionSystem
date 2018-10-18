@@ -17,6 +17,7 @@ public class ItemViewCustomer extends javax.swing.JFrame {
      */
     public ItemViewCustomer() {
         initComponents();
+         setLocationRelativeTo(null);
     }
 
     /**

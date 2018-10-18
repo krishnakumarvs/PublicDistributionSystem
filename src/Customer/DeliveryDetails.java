@@ -17,6 +17,7 @@ public class DeliveryDetails extends javax.swing.JFrame {
      */
     public DeliveryDetails() {
         initComponents();
+         setLocationRelativeTo(null);
     }
 
     /**

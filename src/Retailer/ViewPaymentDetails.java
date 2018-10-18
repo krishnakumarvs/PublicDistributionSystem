@@ -17,6 +17,7 @@ public class ViewPaymentDetails extends javax.swing.JFrame {
      */
     public ViewPaymentDetails() {
         initComponents();
+         setLocationRelativeTo(null);
     }
 
     /**

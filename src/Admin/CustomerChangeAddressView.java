@@ -17,6 +17,7 @@ public class CustomerChangeAddressView extends javax.swing.JFrame {
      */
     public CustomerChangeAddressView() {
         initComponents();
+         setLocationRelativeTo(null);
     }
 
     /**

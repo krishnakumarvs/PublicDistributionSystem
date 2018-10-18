@@ -17,6 +17,7 @@ public class NewRetailerApplication extends javax.swing.JFrame {
      */
     public NewRetailerApplication() {
         initComponents();
+         setLocationRelativeTo(null);
     }
 
     /**

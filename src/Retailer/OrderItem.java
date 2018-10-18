@@ -17,6 +17,7 @@ public class OrderItem extends javax.swing.JFrame {
      */
     public OrderItem() {
         initComponents();
+         setLocationRelativeTo(null);
     }
 
     /**

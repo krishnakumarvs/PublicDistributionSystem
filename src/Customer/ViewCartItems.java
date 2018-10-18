@@ -17,6 +17,7 @@ public class ViewCartItems extends javax.swing.JFrame {
      */
     public ViewCartItems() {
         initComponents();
+         setLocationRelativeTo(null);
     }
 
     /**

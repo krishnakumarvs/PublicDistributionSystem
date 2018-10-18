@@ -21,6 +21,7 @@ public class LoginAdmin extends javax.swing.JFrame {
      */
     public LoginAdmin() {
         initComponents();
+         setLocationRelativeTo(null);
     }
 
     /**
@@ -119,7 +120,7 @@ public class LoginAdmin extends javax.swing.JFrame {
         System.out.println(username);
         System.out.println(password);
         
-        String query="select * from user where uname='" +  username + "' and pwd='" + password + "'";
+        String query="select * from user_details where user_name='" +  username + "' and password='" + password + "' and user_type='admin' ";
         System.out.println(query);
         
         Dbcon dbcon=new Dbcon();

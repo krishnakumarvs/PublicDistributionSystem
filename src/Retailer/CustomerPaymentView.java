@@ -17,6 +17,7 @@ public class CustomerPaymentView extends javax.swing.JFrame {
      */
     public CustomerPaymentView() {
         initComponents();
+         setLocationRelativeTo(null);
     }
 
     /**

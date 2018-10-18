@@ -17,6 +17,7 @@ public class RejectReason extends javax.swing.JFrame {
      */
     public RejectReason() {
         initComponents();
+         setLocationRelativeTo(null);
     }
 
     /**
@@ -36,7 +37,6 @@ public class RejectReason extends javax.swing.JFrame {
         jTextArea1 = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -58,8 +58,6 @@ public class RejectReason extends javax.swing.JFrame {
         });
 
         jButton2.setText("Cancel");
-
-        jButton3.setText("Browse");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -87,10 +85,8 @@ public class RejectReason extends javax.swing.JFrame {
                                         .addComponent(jButton2))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(48, 48, 48)
-                                        .addComponent(jScrollPane1)))))
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton3)))
-                .addContainerGap(159, Short.MAX_VALUE))
+                                        .addComponent(jScrollPane1)))))))
+                .addContainerGap(244, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -107,10 +103,7 @@ public class RejectReason extends javax.swing.JFrame {
                         .addComponent(jLabel3))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(57, 57, 57)
-                        .addComponent(jButton3)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(72, 72, 72)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
@@ -166,7 +159,6 @@ public class RejectReason extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

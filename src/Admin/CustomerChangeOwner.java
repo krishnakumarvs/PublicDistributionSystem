@@ -17,6 +17,7 @@ public class CustomerChangeOwner extends javax.swing.JFrame {
      */
     public CustomerChangeOwner() {
         initComponents();
+         setLocationRelativeTo(null);
     }
 
     /**

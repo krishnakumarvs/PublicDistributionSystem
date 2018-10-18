@@ -17,6 +17,7 @@ public class ViewComplaints extends javax.swing.JFrame {
      */
     public ViewComplaints() {
         initComponents();
+         setLocationRelativeTo(null);
     }
 
     /**

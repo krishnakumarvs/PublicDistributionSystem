@@ -17,6 +17,7 @@ public class CustomerAddMember extends javax.swing.JFrame {
      */
     public CustomerAddMember() {
         initComponents();
+         setLocationRelativeTo(null);
     }
 
     /**

@@ -17,6 +17,7 @@ public class CustomerDeleteMember extends javax.swing.JFrame {
      */
     public CustomerDeleteMember() {
         initComponents();
+         setLocationRelativeTo(null);
     }
 
     /**

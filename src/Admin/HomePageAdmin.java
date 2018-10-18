@@ -19,6 +19,7 @@ public class HomePageAdmin extends javax.swing.JFrame {
      */
     public HomePageAdmin() {
         initComponents();
+         setLocationRelativeTo(null);
     }
 
     /**

@@ -17,6 +17,7 @@ public class CustomerApplicationView extends javax.swing.JFrame {
      */
     public CustomerApplicationView() {
         initComponents();
+         setLocationRelativeTo(null);
     }
 
     /**

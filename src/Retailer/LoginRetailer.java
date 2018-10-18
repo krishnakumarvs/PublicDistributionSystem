@@ -6,17 +6,23 @@
 
 package Retailer;
 
+import db.Dbcon;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author USER
  */
-public class LoginRetailer extends javax.swing.JFrame {
 
+public class LoginRetailer extends javax.swing.JFrame {
+    String userid;
     /**
      * Creates new form LoginRetailer
      */
     public LoginRetailer() {
         initComponents();
+         setLocationRelativeTo(null);
     }
 
     /**
@@ -30,9 +36,9 @@ public class LoginRetailer extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        username_textfield = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        password_passwordfield = new javax.swing.JPasswordField();
         jLabel4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -89,21 +95,22 @@ public class LoginRetailer extends javax.swing.JFrame {
                         .addGap(101, 101, 101)
                         .addComponent(jButton1)
                         .addGap(30, 30, 30)
-                        .addComponent(jButton2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(71, 71, 71)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
-                            .addComponent(jPasswordField1))))
-                .addContainerGap(183, Short.MAX_VALUE))
+                        .addComponent(jButton2)))
+                .addContainerGap(240, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(62, 62, 62)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 142, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addGap(85, 85, 85))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(71, 71, 71)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(username_textfield, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
+                    .addComponent(password_passwordfield))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -113,11 +120,11 @@ public class LoginRetailer extends javax.swing.JFrame {
                 .addGap(43, 43, 43)
                 .addComponent(jLabel2)
                 .addGap(1, 1, 1)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(username_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(password_passwordfield, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
@@ -141,9 +148,41 @@ public class LoginRetailer extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        HomePageRetailer homePageRetailer=new HomePageRetailer();
+      /*  HomePageRetailer homePageRetailer=new HomePageRetailer();
         homePageRetailer.setVisible(true);
-        this.dispose();
+        this.dispose();*/
+        
+        String password;
+        String username;
+        username=username_textfield.getText();
+        password=password_passwordfield.getText();
+        System.out.println(username);
+        System.out.println(password);
+        
+        String query="select * from user_details where user_name='" +  username + "' and password='" + password + "' and user_type='retailer'";
+        System.out.println(query);
+        
+        Dbcon dbcon=new Dbcon();
+        ResultSet rs=dbcon.select(query);//insert();
+        try
+        {
+            if(rs.next())
+            {
+                HomePageRetailer homePageRetailer=new HomePageRetailer();
+                homePageRetailer.setVisible(true);
+                this.dispose();
+            }
+            else
+            {
+                //System.out.println("Invalid User...");
+               JOptionPane.showMessageDialog(rootPane, "Invalid User..");
+            }
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
@@ -196,7 +235,7 @@ public class LoginRetailer extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JPasswordField password_passwordfield;
+    private javax.swing.JTextField username_textfield;
     // End of variables declaration//GEN-END:variables
 }

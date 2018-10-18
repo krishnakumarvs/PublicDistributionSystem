@@ -13,14 +13,21 @@ import pds.HomePage;
  * @author USER
  */
 public class HomePageCustomer extends javax.swing.JFrame {
-
+    String userid;
     /**
      * Creates new form HomePageCustomer
      */
     public HomePageCustomer() {
         initComponents();
+         
     }
 
+     public HomePageCustomer(String userid) {
+         //setLocationRelativeTo(null);
+         this.userid=userid;
+        // System.out.println(userid);
+        initComponents();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -282,7 +289,7 @@ public class HomePageCustomer extends javax.swing.JFrame {
 
     private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
         // TODO add your handling code here:
-        ChangePassword changePassword=new ChangePassword();
+        ChangePassword changePassword=new ChangePassword(userid);
         changePassword.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jMenuItem13ActionPerformed
@@ -306,7 +313,7 @@ public class HomePageCustomer extends javax.swing.JFrame {
 
     private void jMenu28MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu28MouseClicked
         // TODO add your handling code here:
-         CustomerComplaints customerComplaints=new CustomerComplaints();
+         CustomerComplaints customerComplaints=new CustomerComplaints(userid);
         customerComplaints.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jMenu28MouseClicked

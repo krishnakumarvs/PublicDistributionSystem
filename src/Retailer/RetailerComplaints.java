@@ -17,6 +17,7 @@ public class RetailerComplaints extends javax.swing.JFrame {
      */
     public RetailerComplaints() {
         initComponents();
+         setLocationRelativeTo(null);
     }
 
     /**

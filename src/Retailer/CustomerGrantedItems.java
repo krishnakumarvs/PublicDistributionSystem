@@ -17,6 +17,7 @@ public class CustomerGrantedItems extends javax.swing.JFrame {
      */
     public CustomerGrantedItems() {
         initComponents();
+         setLocationRelativeTo(null);
     }
 
     /**

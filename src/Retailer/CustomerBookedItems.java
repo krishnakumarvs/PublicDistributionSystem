@@ -17,6 +17,7 @@ public class CustomerBookedItems extends javax.swing.JFrame {
      */
     public CustomerBookedItems() {
         initComponents();
+         setLocationRelativeTo(null);
     }
 
     /**

@@ -17,6 +17,7 @@ public class EditMemberDetails extends javax.swing.JFrame {
      */
     public EditMemberDetails() {
         initComponents();
+         setLocationRelativeTo(null);
     }
 
     /**

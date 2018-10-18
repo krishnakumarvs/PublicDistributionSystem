@@ -17,6 +17,7 @@ public class RetailerApplication_2 extends javax.swing.JFrame {
      */
     public RetailerApplication_2() {
         initComponents();
+         setLocationRelativeTo(null);
     }
 
     /**

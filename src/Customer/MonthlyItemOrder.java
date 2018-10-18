@@ -17,6 +17,7 @@ public class MonthlyItemOrder extends javax.swing.JFrame {
      */
     public MonthlyItemOrder() {
         initComponents();
+         setLocationRelativeTo(null);
     }
 
     /**

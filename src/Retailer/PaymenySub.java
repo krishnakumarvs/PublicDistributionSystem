@@ -17,6 +17,7 @@ public class PaymenySub extends javax.swing.JFrame {
      */
     public PaymenySub() {
         initComponents();
+         setLocationRelativeTo(null);
     }
 
     /**

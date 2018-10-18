@@ -17,6 +17,7 @@ public class OtherItemOrder extends javax.swing.JFrame {
      */
     public OtherItemOrder() {
         initComponents();
+         setLocationRelativeTo(null);
     }
 
     /**

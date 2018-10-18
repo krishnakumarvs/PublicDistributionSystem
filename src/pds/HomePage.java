@@ -21,6 +21,7 @@ public class HomePage extends javax.swing.JFrame {
      */
     public HomePage() {
         initComponents();
+         setLocationRelativeTo(null);
     }
 
     /**

@@ -17,6 +17,7 @@ public class RetailerGrantedItems extends javax.swing.JFrame {
      */
     public RetailerGrantedItems() {
         initComponents();
+         setLocationRelativeTo(null);
     }
 
     /**

@@ -17,6 +17,7 @@ public class RetailerBookingView extends javax.swing.JFrame {
      */
     public RetailerBookingView() {
         initComponents();
+         setLocationRelativeTo(null);
     }
 
     /**

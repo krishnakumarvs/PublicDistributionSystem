@@ -17,6 +17,7 @@ public class AddMember extends javax.swing.JFrame {
      */
     public AddMember() {
         initComponents();
+         setLocationRelativeTo(null);
     }
 
     /**
@@ -118,7 +119,7 @@ public class AddMember extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(77, 77, 77)
+                .addGap(111, 111, 111)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -128,7 +129,7 @@ public class AddMember extends javax.swing.JFrame {
                                     .addComponent(jLabel4)
                                     .addGap(248, 248, 248))
                                 .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jTextField5)
+                                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(68, 68, 68)))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel9)
@@ -164,27 +165,25 @@ public class AddMember extends javax.swing.JFrame {
                                             .addComponent(jRadioButton2))
                                         .addComponent(jLabel10)))))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jButton2)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel8)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jRadioButton3)))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jRadioButton4))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton3)
-                                    .addGap(50, 50, 50)
-                                    .addComponent(jButton4))))))
-                .addContainerGap(193, Short.MAX_VALUE))
+                            .addComponent(jLabel8)
+                            .addGap(18, 18, 18)
+                            .addComponent(jRadioButton3)
+                            .addGap(18, 18, 18)
+                            .addComponent(jRadioButton4))))
+                .addContainerGap(159, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton2)
+                .addGap(63, 63, 63)
+                .addComponent(jButton3)
+                .addGap(50, 50, 50)
+                .addComponent(jButton4)
+                .addGap(217, 217, 217))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(78, 78, 78)
+                .addGap(48, 48, 48)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -228,7 +227,7 @@ public class AddMember extends javax.swing.JFrame {
                     .addComponent(jLabel8)
                     .addComponent(jRadioButton3)
                     .addComponent(jRadioButton4))
-                .addGap(18, 18, 18)
+                .addGap(48, 48, 48)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
                     .addComponent(jButton2)

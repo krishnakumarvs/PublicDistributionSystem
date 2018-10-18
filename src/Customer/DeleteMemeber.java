@@ -17,6 +17,7 @@ public class DeleteMemeber extends javax.swing.JFrame {
      */
     public DeleteMemeber() {
         initComponents();
+         setLocationRelativeTo(null);
     }
 
     /**

@@ -19,6 +19,7 @@ public class HomePageRetailer extends javax.swing.JFrame {
      */
     public HomePageRetailer() {
         initComponents();
+         setLocationRelativeTo(null);
     }
 
     /**
