@@ -67,5 +67,9 @@ public class Dbcon {
         }
         return a;
     }
+    
+    public Connection getConnection() {
+        return con;
+    }
    
 }

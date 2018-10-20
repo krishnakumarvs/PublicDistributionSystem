@@ -49,8 +49,12 @@ public class LoginAdmin extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
         jLabel2.setText("User Name");
 
+        username_textfield.setText("admin");
+
         jLabel3.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
         jLabel3.setText("Password");
+
+        password_passwordfield.setText("admin");
 
         jButton1.setText("Login");
         jButton1.addActionListener(new java.awt.event.ActionListener() {

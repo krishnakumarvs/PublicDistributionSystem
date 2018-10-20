@@ -3,8 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Admin;
+
+import db.Dbcon;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.sql.PreparedStatement;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -12,13 +26,15 @@ package Admin;
  */
 public class AddItem extends javax.swing.JFrame {
 
+    String selectedFilePath = "";
+
     /**
      * Creates new form AddItem
      */
     public AddItem() {
         initComponents();
-         setLocationRelativeTo(null);
-      
+        setLocationRelativeTo(null);
+
     }
 
     /**
@@ -33,7 +49,7 @@ public class AddItem extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
+        photo_label = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -44,21 +60,21 @@ public class AddItem extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jSpinner1 = new javax.swing.JSpinner();
-        jSpinner2 = new javax.swing.JSpinner();
-        jSpinner3 = new javax.swing.JSpinner();
-        jSpinner4 = new javax.swing.JSpinner();
-        jSpinner5 = new javax.swing.JSpinner();
+        ayy_price = new javax.swing.JSpinner();
+        apl_price = new javax.swing.JSpinner();
+        bpl_price = new javax.swing.JSpinner();
+        ayya_price = new javax.swing.JSpinner();
+        other_price = new javax.swing.JSpinner();
         jLabel3 = new javax.swing.JLabel();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        monthy_item = new javax.swing.JCheckBox();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
-        jSpinner6 = new javax.swing.JSpinner();
-        jSpinner7 = new javax.swing.JSpinner();
-        jSpinner8 = new javax.swing.JSpinner();
-        jSpinner9 = new javax.swing.JSpinner();
-        jSpinner10 = new javax.swing.JSpinner();
+        monthly_ayy_price = new javax.swing.JSpinner();
+        monthly_apl_price = new javax.swing.JSpinner();
+        monthly_bpl_price = new javax.swing.JSpinner();
+        monthly_ayya_price = new javax.swing.JSpinner();
+        monthly_other_price = new javax.swing.JSpinner();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
@@ -67,16 +83,21 @@ public class AddItem extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel1.setText("Item Details...");
+        jLabel1.setText("Item Details");
 
         jLabel2.setText("Name");
 
-        jLabel4.setText("Image");
-        jLabel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        photo_label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        photo_label.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel5.setText("Price ");
 
         jButton1.setText("Browse");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Submit");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -106,7 +127,7 @@ public class AddItem extends javax.swing.JFrame {
 
         jLabel3.setText("Other");
 
-        jCheckBox1.setText("Monthly Items");
+        monthy_item.setText("Monthly Items");
 
         jLabel14.setText("AYY");
 
@@ -127,17 +148,10 @@ public class AddItem extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(311, 311, 311)
-                .addComponent(jLabel1)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addGap(63, 63, 63)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(0, 90, Short.MAX_VALUE)
                                 .addComponent(jButton2)
@@ -145,20 +159,21 @@ public class AddItem extends javax.swing.JFrame {
                                 .addComponent(jButton3)
                                 .addGap(114, 114, 114)
                                 .addComponent(jButton4)
-                                .addGap(13, 13, 13))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(30, 30, 30)
+                                .addGap(126, 126, 126))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
                                 .addComponent(jTextField1)
-                                .addGap(192, 192, 192)))
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                                .addGap(177, 177, 177)
+                                .addComponent(photo_label, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                         .addComponent(jButton1)
                         .addGap(32, 32, 32))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
                             .addComponent(jLabel7)
-                            .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(monthy_item, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -167,16 +182,6 @@ public class AddItem extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(93, 93, 93)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel8)
-                                        .addGap(90, 90, 90)
-                                        .addComponent(jLabel9)
-                                        .addGap(81, 81, 81)
-                                        .addComponent(jLabel10)
-                                        .addGap(71, 71, 71)
-                                        .addComponent(jLabel11)
-                                        .addGap(59, 59, 59)
-                                        .addComponent(jLabel3))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel18)
                                         .addGap(90, 90, 90)
@@ -188,27 +193,41 @@ public class AddItem extends javax.swing.JFrame {
                                         .addGap(59, 59, 59)
                                         .addComponent(jLabel6))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(apl_price, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(27, 27, 27)
-                                        .addComponent(jSpinner3, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(bpl_price, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(ayy_price, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jSpinner4, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(ayya_price, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jSpinner5, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(other_price, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel8)
+                                        .addGap(90, 90, 90)
+                                        .addComponent(jLabel9)
+                                        .addGap(81, 81, 81)
+                                        .addComponent(jLabel10)
+                                        .addGap(71, 71, 71)
+                                        .addComponent(jLabel11)
+                                        .addGap(59, 59, 59)
+                                        .addComponent(jLabel3))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(90, 90, 90)
-                                .addComponent(jSpinner7, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(monthly_apl_price, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(27, 27, 27)
-                                .addComponent(jSpinner8, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(monthly_bpl_price, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jSpinner6, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(monthly_ayy_price, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jSpinner9, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(monthly_ayya_price, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jSpinner10, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(monthly_other_price, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(159, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(311, 311, 311)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -216,7 +235,7 @@ public class AddItem extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(36, 36, 36)
-                        .addComponent(jLabel1)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
@@ -226,7 +245,7 @@ public class AddItem extends javax.swing.JFrame {
                         .addGap(74, 74, 74)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jButton1)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(photo_label, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -238,14 +257,14 @@ public class AddItem extends javax.swing.JFrame {
                         .addComponent(jLabel13)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSpinner3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSpinner4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSpinner5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(apl_price, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ayy_price, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bpl_price, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ayya_price, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(other_price, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addGap(31, 31, 31)
-                .addComponent(jCheckBox1)
+                .addComponent(monthy_item)
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -257,11 +276,11 @@ public class AddItem extends javax.swing.JFrame {
                         .addComponent(jLabel17)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jSpinner7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSpinner6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSpinner8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSpinner9, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSpinner10, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(monthly_apl_price, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(monthly_ayy_price, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(monthly_bpl_price, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(monthly_ayya_price, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(monthly_other_price, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -276,17 +295,93 @@ public class AddItem extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        HomePageAdmin homePageAdmin=new HomePageAdmin();
-        homePageAdmin.setVisible(true);
-        this.dispose();
+
+//        try {
+//            new Dbcon().select("select image from items where id = 2 ")
+//        } catch (Exception e) {
+//            System.out.println(e);
+//        }
+        String itemName = jTextField1.getText();
+        int aplPrice = (int) apl_price.getValue();
+        int bplPrice = (int) bpl_price.getValue();
+        int ayyPrice = (int) ayy_price.getValue();
+        int ayyaPrice = (int) ayya_price.getValue();
+        int otherPrice = (int) other_price.getValue();
+        boolean monthlyItem = monthy_item.isSelected();
+
+        int monthlyAplPrice = (int) monthly_apl_price.getValue();
+        int monthlyBplPrice = (int) monthly_bpl_price.getValue();
+        int monthlyAyyPrice = (int) monthly_ayy_price.getValue();
+        int monthlyAyyaPrice = (int) monthly_ayya_price.getValue();
+        int monthlyOtherPrice = (int) monthly_other_price.getValue();
+
+        try {
+            InputStream inputStream;
+            if(selectedFilePath.trim().equals("")) {
+                inputStream = null;
+            } else {
+                inputStream = new FileInputStream(new File(selectedFilePath));
+            }
+             
+            String sql = "INSERT INTO items (name, price_apl, price_bpl, price_ayy,price_ayya, price_other,"
+                    + " monthly_price_apl, monthly_price_bpl,monthly_price_ayy, monthly_price_ayya, monthly_price_other ,monthly_item, image"
+                    + "  ) values ('" + itemName + "', "
+                    + "" + aplPrice + " , "
+                    + "" + bplPrice + " , "
+                    + "" + ayyPrice + " , "
+                    + "" + ayyaPrice + " , "
+                    + "" + otherPrice + " , "
+                    + "" + monthlyAplPrice + " , "
+                    + "" + monthlyBplPrice + " , "
+                    + "" + monthlyAyyPrice + " , "
+                    + "" + monthlyAyyaPrice + " , "
+                    + "" + monthlyOtherPrice + " , "
+                    + "" + monthlyItem + " , "
+                    + " ?)";
+            PreparedStatement statement = new Dbcon().getConnection().prepareStatement(sql);
+            statement.setBlob(1, inputStream);
+            statement.executeUpdate();
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        HomePageAdmin homePageAdmin=new HomePageAdmin();
+        HomePageAdmin homePageAdmin = new HomePageAdmin();
         homePageAdmin.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        JFileChooser fc = new JFileChooser();
+        FileFilter imageFilter = new FileNameExtensionFilter(
+                "Image files", ImageIO.getReaderFileSuffixes());
+        fc.setFileFilter(imageFilter);
+        int result = fc.showOpenDialog(null);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File file = fc.getSelectedFile();
+            String filePath = file.getAbsolutePath();
+            File source_file = file;
+            Toolkit toolkit = Toolkit.getDefaultToolkit();
+
+            try {
+                Image image = toolkit.getImage(file.getPath());
+                Image sc = image.getScaledInstance(photo_label.getWidth(), photo_label.getHeight(), Image.SCALE_DEFAULT);
+                ImageIcon icon = new ImageIcon(sc);
+                photo_label.setIcon(icon);
+                selectedFilePath = filePath;
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+
+        }
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -324,11 +419,14 @@ public class AddItem extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JSpinner apl_price;
+    private javax.swing.JSpinner ayy_price;
+    private javax.swing.JSpinner ayya_price;
+    private javax.swing.JSpinner bpl_price;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -340,22 +438,19 @@ public class AddItem extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JSpinner jSpinner10;
-    private javax.swing.JSpinner jSpinner2;
-    private javax.swing.JSpinner jSpinner3;
-    private javax.swing.JSpinner jSpinner4;
-    private javax.swing.JSpinner jSpinner5;
-    private javax.swing.JSpinner jSpinner6;
-    private javax.swing.JSpinner jSpinner7;
-    private javax.swing.JSpinner jSpinner8;
-    private javax.swing.JSpinner jSpinner9;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JSpinner monthly_apl_price;
+    private javax.swing.JSpinner monthly_ayy_price;
+    private javax.swing.JSpinner monthly_ayya_price;
+    private javax.swing.JSpinner monthly_bpl_price;
+    private javax.swing.JSpinner monthly_other_price;
+    private javax.swing.JCheckBox monthy_item;
+    private javax.swing.JSpinner other_price;
+    private javax.swing.JLabel photo_label;
     // End of variables declaration//GEN-END:variables
 }
