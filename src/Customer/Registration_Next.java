@@ -33,19 +33,7 @@ public class Registration_Next extends javax.swing.JFrame {
     public Registration_Next() {
         initComponents();
         add_panel.setVisible(false);
-        this.userid = "2";
 
-//        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
-//        String arr[] = new String[6];
-//        arr[0] = "sdsd";
-//        arr[1] = "sdsd";
-//        arr[2] = "sdsd";
-//        arr[3] = "sdsd";
-//        arr[4] = "sdsd";
-//        arr[5] = "sdsd";
-//        
-//        model.addRow(arr);
-//        model.addRow(arr);
     }
 
     public Registration_Next(String userid) {
@@ -479,7 +467,7 @@ public class Registration_Next extends javax.swing.JFrame {
 //                    + "" + monthlyOtherPrice + " , "
 //                    + "" + monthlyItem + " , "
 //                    + " ?)";
-            String query = "update user_details set no_of_family_members='" + nofamilymember + "',user_name='" + username + "',password=' " + password + "' , address_proof_doc = ?, age_certificate_doc = ? , annual_income_doc = ? , aadhaar_doc = ?  where id='" + userid + "'";
+            String query = "update user_details set no_of_family_members='" + nofamilymember + "',user_name='" + username + "',password=' " + confirm_password + "' , address_proof_doc = ?, age_certificate_doc = ? , annual_income_doc = ? , aadhaar_doc = ?  where id='" + userid + "'";
             System.out.println(query);
             try {
 
