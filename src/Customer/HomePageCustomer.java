@@ -13,20 +13,21 @@ import pds.HomePage;
  * @author USER
  */
 public class HomePageCustomer extends javax.swing.JFrame {
-    String userid;
+    public static String userid;
     /**
      * Creates new form HomePageCustomer
      */
     public HomePageCustomer() {
-        initComponents();
+        //initComponents();
          
     }
 
      public HomePageCustomer(String userid) {
-         //setLocationRelativeTo(null);
+         
          this.userid=userid;
         // System.out.println(userid);
         initComponents();
+        setLocationRelativeTo(null);
     }
     /**
      * This method is called from within the constructor to initialize the form.

@@ -100,6 +100,8 @@ public class ItemViewCustomer extends javax.swing.JFrame {
 
         jLabel6.setText("Amount");
 
+        jTextField2.setEditable(false);
+
         jButton1.setText("Back");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -108,6 +110,17 @@ public class ItemViewCustomer extends javax.swing.JFrame {
         });
 
         jButton2.setText("Add to Cart");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jSpinner1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jSpinner1StateChanged(evt);
+            }
+        });
 
         item_price_1.setText("0");
 
@@ -144,7 +157,7 @@ public class ItemViewCustomer extends javax.swing.JFrame {
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(item_price_1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addComponent(photo_label_1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(322, Short.MAX_VALUE))
+                .addContainerGap(277, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -184,6 +197,33 @@ public class ItemViewCustomer extends javax.swing.JFrame {
         monthlyItemOrder.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+        
+        String userId = HomePageCustomer.userid;
+        int quantity = Integer.parseInt(jSpinner1.getValue().toString());
+        // itemId
+        
+        String query = "insert into user_cart (item_id, quantity, user_id) values ( "+itemId+", "+quantity+", "+userId+" )";
+        int insert = new Dbcon().insert(query);
+        if(insert>0) {
+            JOptionPane.showMessageDialog(rootPane, "Added to cart");
+            MonthlyItemOrder monthlyItemOrder = new MonthlyItemOrder();
+            monthlyItemOrder.setVisible(true);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Could not addd to cart");
+        }
+// TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jSpinner1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinner1StateChanged
+
+        int quantity = Integer.parseInt(jSpinner1.getValue().toString());
+        
+// TODO add your handling code here:
+    }//GEN-LAST:event_jSpinner1StateChanged
 
     /**
      * @param args the command line arguments
