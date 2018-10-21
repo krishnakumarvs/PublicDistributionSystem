@@ -3,8 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Retailer;
+
+import db.Dbcon;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -12,12 +15,42 @@ package Retailer;
  */
 public class ViewItemRetailer extends javax.swing.JFrame {
 
+    int itemId;
+
     /**
      * Creates new form ViewItemRetailer
      */
     public ViewItemRetailer() {
+
+    }
+
+    public ViewItemRetailer(int itemId) {
         initComponents();
-         setLocationRelativeTo(null);
+        setLocationRelativeTo(null);
+        this.itemId = itemId;
+        loadItemDetails();
+    }
+
+    private void loadItemDetails() {
+        try {
+            ResultSet rs = new Dbcon().select("select * from items where id = " + itemId);
+            if (rs.next()) {
+                String itemName = rs.getString("name");
+                String price = rs.getString("retailer_price");
+
+                jLabel1.setText(itemName);
+                jLabel7.setText(price);
+                
+                int quantity = (int) quantity_spinner.getValue();
+                int price2 = Integer.parseInt(jLabel7.getText().trim());
+                jTextField2.setText((quantity * price2) + "");
+            } else {
+                System.err.println("NO items ");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     /**
@@ -38,7 +71,9 @@ public class ViewItemRetailer extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
-        jSpinner1 = new javax.swing.JSpinner();
+        quantity_spinner = new javax.swing.JSpinner();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -48,9 +83,11 @@ public class ViewItemRetailer extends javax.swing.JFrame {
 
         jLabel6.setText("Amount");
 
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Name");
 
-        jLabel2.setText("Image");
+        jTextField2.setEditable(false);
+
         jLabel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jButton1.setText("Back");
@@ -69,6 +106,19 @@ public class ViewItemRetailer extends javax.swing.JFrame {
             }
         });
 
+        quantity_spinner.setModel(new javax.swing.SpinnerNumberModel(1, 1, 100, 1));
+        quantity_spinner.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                quantity_spinnerStateChanged(evt);
+            }
+        });
+
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jLabel7.setText("0");
+
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jLabel8.setText("100");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -82,24 +132,26 @@ public class ViewItemRetailer extends javax.swing.JFrame {
                             .addComponent(jLabel6))
                         .addGap(39, 39, 39)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jSpinner1, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
+                            .addComponent(quantity_spinner, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
                             .addComponent(jTextField2)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(289, 289, 289)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(233, 233, 233)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(267, 267, 267)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel3)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(192, 192, 192)
                         .addComponent(jButton1)
                         .addGap(87, 87, 87)
-                        .addComponent(jButton2)))
+                        .addComponent(jButton2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(233, 233, 233)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(253, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -110,13 +162,17 @@ public class ViewItemRetailer extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel4)
-                .addGap(23, 23, 23)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel7))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel8))
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(quantity_spinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
@@ -132,15 +188,44 @@ public class ViewItemRetailer extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+
+        try {
+            int ins = new Dbcon().insert("insert into retailer_cart (item_id, quantity,retailer_id) values("
+                    + "" + itemId + " , "
+                    + "" + quantity_spinner.getValue() + " , "
+                    + "" + HomePageRetailer.retailerId + " "
+                    + ""
+                    + ") ");
+
+            if (ins > 0) {
+                JOptionPane.showMessageDialog(rootPane, "Sucessfully added to cart");
+                new OrderItemRetailer().setVisible(true);
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Could not add to cart");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+// TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        HomePageRetailer homePageRetailer=new HomePageRetailer();
+        HomePageRetailer homePageRetailer = new HomePageRetailer();
         homePageRetailer.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void quantity_spinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_quantity_spinnerStateChanged
+
+        int quantity = (int) quantity_spinner.getValue();
+        int price = Integer.parseInt(jLabel7.getText().trim());
+        jTextField2.setText((quantity * price) + "");
+
+// TODO add your handling code here:
+    }//GEN-LAST:event_quantity_spinnerStateChanged
 
     /**
      * @param args the command line arguments
@@ -186,7 +271,9 @@ public class ViewItemRetailer extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JSpinner jSpinner1;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JSpinner quantity_spinner;
     // End of variables declaration//GEN-END:variables
 }

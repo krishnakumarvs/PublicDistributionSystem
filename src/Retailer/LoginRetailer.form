@@ -23,6 +23,13 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
+              <Component id="jLabel5" min="-2" pref="65" max="-2" attributes="0"/>
+              <EmptySpace pref="142" max="32767" attributes="0"/>
+              <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
+          </Group>
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
@@ -35,23 +42,15 @@
                       <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                       <Component id="jButton2" min="-2" max="-2" attributes="0"/>
                   </Group>
-              </Group>
-              <EmptySpace pref="240" max="32767" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
-              <Component id="jLabel5" min="-2" pref="65" max="-2" attributes="0"/>
-              <EmptySpace pref="142" max="32767" attributes="0"/>
-              <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jLabel2" alignment="0" min="-2" pref="95" max="-2" attributes="0"/>
-                  <Component id="jLabel3" alignment="0" min="-2" pref="72" max="-2" attributes="0"/>
-                  <Component id="username_textfield" alignment="0" pref="231" max="32767" attributes="0"/>
-                  <Component id="password_passwordfield" alignment="0" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jLabel2" alignment="0" min="-2" pref="95" max="-2" attributes="0"/>
+                          <Component id="jLabel3" alignment="0" min="-2" pref="72" max="-2" attributes="0"/>
+                          <Component id="username_textfield" alignment="0" pref="231" max="32767" attributes="0"/>
+                          <Component id="password_passwordfield" alignment="0" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -103,6 +102,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="username_textfield">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="ret"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
@@ -113,6 +115,12 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JPasswordField" name="password_passwordfield">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="ret"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="password_passwordfieldActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>

@@ -80,6 +80,8 @@ public class AddItem extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
+        retailer_price = new javax.swing.JSpinner();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -126,6 +128,16 @@ public class AddItem extends javax.swing.JFrame {
 
         jLabel13.setText("Category");
 
+        ayy_price.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
+
+        apl_price.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
+
+        bpl_price.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
+
+        ayya_price.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
+
+        other_price.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
+
         jLabel3.setText("Other");
 
         monthy_item.setText("Monthly Items");
@@ -136,6 +148,16 @@ public class AddItem extends javax.swing.JFrame {
 
         jLabel17.setText("Category");
 
+        monthly_ayy_price.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
+
+        monthly_apl_price.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
+
+        monthly_bpl_price.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
+
+        monthly_ayya_price.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
+
+        monthly_other_price.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
+
         jLabel6.setText("Other");
 
         jLabel7.setText("Price ");
@@ -143,6 +165,10 @@ public class AddItem extends javax.swing.JFrame {
         jLabel18.setText("APL");
 
         jLabel19.setText("BPL");
+
+        retailer_price.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
+
+        jLabel4.setText("Retailer");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -161,7 +187,7 @@ public class AddItem extends javax.swing.JFrame {
                                 .addGap(114, 114, 114)
                                 .addComponent(jButton4)
                                 .addGap(126, 126, 126))
-                            .addGroup(layout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(18, 18, 18)
                                 .addComponent(jTextField1)
@@ -174,10 +200,7 @@ public class AddItem extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
                             .addComponent(jLabel7)
-                            .addComponent(monthy_item, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(monthy_item, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel13)
                             .addComponent(jLabel17)
                             .addGroup(layout.createSequentialGroup()
@@ -194,25 +217,31 @@ public class AddItem extends javax.swing.JFrame {
                                         .addGap(59, 59, 59)
                                         .addComponent(jLabel6))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(apl_price, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(27, 27, 27)
-                                        .addComponent(bpl_price, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(ayy_price, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(apl_price, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(27, 27, 27)
+                                                .addComponent(bpl_price, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(ayy_price, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(ayya_price, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(other_price, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel8)
+                                                .addGap(90, 90, 90)
+                                                .addComponent(jLabel9)
+                                                .addGap(81, 81, 81)
+                                                .addComponent(jLabel10)
+                                                .addGap(71, 71, 71)
+                                                .addComponent(jLabel11)
+                                                .addGap(59, 59, 59)
+                                                .addComponent(jLabel3)))
                                         .addGap(18, 18, 18)
-                                        .addComponent(ayya_price, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(other_price, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel8)
-                                        .addGap(90, 90, 90)
-                                        .addComponent(jLabel9)
-                                        .addGap(81, 81, 81)
-                                        .addComponent(jLabel10)
-                                        .addGap(71, 71, 71)
-                                        .addComponent(jLabel11)
-                                        .addGap(59, 59, 59)
-                                        .addComponent(jLabel3))))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel4)
+                                            .addComponent(retailer_price, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(90, 90, 90)
                                 .addComponent(monthly_apl_price, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -224,7 +253,7 @@ public class AddItem extends javax.swing.JFrame {
                                 .addComponent(monthly_ayya_price, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(monthly_other_price, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(159, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(311, 311, 311)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -249,7 +278,9 @@ public class AddItem extends javax.swing.JFrame {
                             .addComponent(photo_label, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel3)
+                        .addComponent(jLabel4))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel8)
                         .addComponent(jLabel9)
@@ -263,7 +294,8 @@ public class AddItem extends javax.swing.JFrame {
                     .addComponent(bpl_price, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ayya_price, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(other_price, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
+                    .addComponent(jLabel5)
+                    .addComponent(retailer_price, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addComponent(monthy_item)
                 .addGap(28, 28, 28)
@@ -315,6 +347,8 @@ public class AddItem extends javax.swing.JFrame {
         int monthlyAyyPrice = (int) monthly_ayy_price.getValue();
         int monthlyAyyaPrice = (int) monthly_ayya_price.getValue();
         int monthlyOtherPrice = (int) monthly_other_price.getValue();
+        
+        int retailerPrice = (int) retailer_price.getValue();
 
         try {
             InputStream inputStream;
@@ -324,9 +358,10 @@ public class AddItem extends javax.swing.JFrame {
                 inputStream = new FileInputStream(new File(selectedFilePath));
             }
              
-            String sql = "INSERT INTO items (name, price_apl, price_bpl, price_ayy,price_ayya, price_other,"
+            String sql = "INSERT INTO items (name,retailer_price, price_apl, price_bpl, price_ayy,price_ayya, price_other,"
                     + " monthly_price_apl, monthly_price_bpl,monthly_price_ayy, monthly_price_ayya, monthly_price_other ,monthly_item, image"
                     + "  ) values ('" + itemName + "', "
+                    + "" + retailerPrice + " , "
                     + "" + aplPrice + " , "
                     + "" + bplPrice + " , "
                     + "" + ayyPrice + " , "
@@ -444,6 +479,7 @@ public class AddItem extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -458,5 +494,6 @@ public class AddItem extends javax.swing.JFrame {
     private javax.swing.JCheckBox monthy_item;
     private javax.swing.JSpinner other_price;
     private javax.swing.JLabel photo_label;
+    private javax.swing.JSpinner retailer_price;
     // End of variables declaration//GEN-END:variables
 }

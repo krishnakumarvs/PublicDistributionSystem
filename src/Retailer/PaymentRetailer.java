@@ -3,8 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Retailer;
+
+import db.Dbcon;
+import java.sql.ResultSet;
+import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -12,12 +16,28 @@ package Retailer;
  */
 public class PaymentRetailer extends javax.swing.JFrame {
 
+    float amount;
+    String items;
+    int itemsCount;
+    
+    List<Integer> myList;
+
     /**
      * Creates new form PaymentRetailer
      */
     public PaymentRetailer() {
+
+    }
+
+    public PaymentRetailer(float amount, String items, int itemsCount, List<Integer> myList) {
+        this.amount = amount;
+        this.myList = myList;
+        this.items = items;
+        this.itemsCount = itemsCount;
+        
         initComponents();
-         setLocationRelativeTo(null);
+        setLocationRelativeTo(null);
+        jTextField1.setText(amount + "");
     }
 
     /**
@@ -29,6 +49,7 @@ public class PaymentRetailer extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -52,6 +73,8 @@ public class PaymentRetailer extends javax.swing.JFrame {
             }
         });
 
+        jTextField1.setEditable(false);
+
         jButton2.setText("Cancel");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -61,8 +84,11 @@ public class PaymentRetailer extends javax.swing.JFrame {
 
         jLabel3.setText("Payment Options");
 
+        buttonGroup1.add(jRadioButton1);
+        jRadioButton1.setSelected(true);
         jRadioButton1.setText("Credit Card");
 
+        buttonGroup1.add(jRadioButton2);
         jRadioButton2.setText("Debit Card");
 
         jButton3.setText("Back");
@@ -129,22 +155,58 @@ public class PaymentRetailer extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        PaymenySub paymenySub=new PaymenySub();
-        paymenySub.setVisible(true);
-        this.dispose();
+
+        try {
+            int inss = new Dbcon().insert("insert into retailer_orders (amount, retailer_id, payment_type, items, created_at,no_of_items ) "
+                    + " values ("
+                    + " " + amount + " , "
+                    + " " + HomePageRetailer.retailerId + " , "
+                    + " '" + (jRadioButton1.isSelected() ? jRadioButton1.getText() : jRadioButton2.getText()) + "' , "
+                    + " '" + items + "' , "
+                    + " '" + new Date().getTime() + "' ,  "
+                    + "" + itemsCount + ""
+                    + ")"
+                    + "");
+
+            if (inss > 0) {
+                ResultSet rs = new Dbcon().select("select max(id) from retailer_orders");
+                if (rs.next()) {
+                    String retailer_order_id = rs.getString(1);
+
+                    String deleteQuery = "delete from retailer_cart where id in ( ";
+                    for (Integer  cartItem : myList) {
+                        deleteQuery += cartItem + ",";
+                    }
+
+                    deleteQuery = deleteQuery.substring(0, deleteQuery.length() - 1) + ")";
+
+                    new Dbcon().update(deleteQuery);
+
+                    PaymenySub paymenySub = new PaymenySub(Integer.parseInt(retailer_order_id));
+                    paymenySub.setVisible(true);
+                    this.dispose();
+                }
+            } else {
+                System.err.println("failed to insert");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        ViewCartItems viewCartItems=new ViewCartItems();
+        ViewCartItemsRetailer viewCartItems = new ViewCartItemsRetailer();
         viewCartItems.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-       HomePageRetailer homePageRetailer=new HomePageRetailer();
-       homePageRetailer.setVisible(true);
+        HomePageRetailer homePageRetailer = new HomePageRetailer();
+        homePageRetailer.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -184,6 +246,7 @@ public class PaymentRetailer extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;

@@ -13,14 +13,16 @@ import pds.HomePage;
  * @author USER
  */
 public class HomePageRetailer extends javax.swing.JFrame {
-
+    public static int retailerId;
     /**
      * Creates new form HomePageRetailer
      */
     public HomePageRetailer() {
         initComponents();
+        this.setTitle("Retailer - Home");
          setLocationRelativeTo(null);
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -213,7 +215,7 @@ public class HomePageRetailer extends javax.swing.JFrame {
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
-        ViewCartItems viewCartItems=new ViewCartItems();
+        ViewCartItemsRetailer viewCartItems=new ViewCartItemsRetailer();
         viewCartItems.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
@@ -274,7 +276,7 @@ public class HomePageRetailer extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
-       OrderItem orderItem=new OrderItem();
+       OrderItemRetailer orderItem=new OrderItemRetailer();
        orderItem.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
