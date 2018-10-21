@@ -23,6 +23,7 @@ public class MonthlyItemOrder extends javax.swing.JFrame {
     int noItemsInPage = 4;
     int totalNoOfItems = 0;
     String searchName = "";
+    int itemId1,itemId2,itemId3,itemId4;
 
     /**
      * Creates new form MonthlyItemOrder
@@ -81,6 +82,8 @@ public class MonthlyItemOrder extends javax.swing.JFrame {
 
                 item_name_1.setText(rs.getString("name"));
                 item_price_1.setText(rs.getString("price_apl"));
+                itemId1 = Integer.parseInt(rs.getString("id"));
+                
                 Blob imageBlob = rs.getBlob("image");
                 if (imageBlob != null) {
                     InputStream binaryStream = imageBlob.getBinaryStream(1, imageBlob.length());
@@ -102,6 +105,7 @@ public class MonthlyItemOrder extends javax.swing.JFrame {
 
                 item_name_2.setText(rs.getString("name"));
                 item_price_2.setText(rs.getString("price_apl"));
+                itemId2 = Integer.parseInt(rs.getString("id"));
                 Blob imageBlob = rs.getBlob("image");
                 if (imageBlob != null) {
                     InputStream binaryStream = imageBlob.getBinaryStream(1, imageBlob.length());
@@ -123,6 +127,8 @@ public class MonthlyItemOrder extends javax.swing.JFrame {
 
                 item_name_3.setText(rs.getString("name"));
                 item_price_3.setText(rs.getString("price_apl"));
+                itemId3 = Integer.parseInt(rs.getString("id"));
+                
                 Blob imageBlob = rs.getBlob("image");
                 if (imageBlob != null) {
                     InputStream binaryStream = imageBlob.getBinaryStream(1, imageBlob.length());
@@ -144,6 +150,8 @@ public class MonthlyItemOrder extends javax.swing.JFrame {
 
                 item_name_4.setText(rs.getString("name"));
                 item_price_4.setText(rs.getString("price_apl"));
+                itemId4 = Integer.parseInt(rs.getString("id"));
+                
                 Blob imageBlob = rs.getBlob("image");
                 if (imageBlob != null) {
                     InputStream binaryStream = imageBlob.getBinaryStream(1, imageBlob.length());
@@ -460,8 +468,8 @@ public class MonthlyItemOrder extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -501,7 +509,7 @@ public class MonthlyItemOrder extends javax.swing.JFrame {
 
     private void view_item_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_view_item_1ActionPerformed
         // TODO add your handling code here:
-        ItemViewCustomer itemViewCustomer = new ItemViewCustomer();
+        ItemViewCustomer itemViewCustomer = new ItemViewCustomer(itemId1);
         itemViewCustomer.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_view_item_1ActionPerformed
@@ -514,15 +522,27 @@ public class MonthlyItemOrder extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void view_item_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_view_item_2ActionPerformed
+        ItemViewCustomer itemViewCustomer = new ItemViewCustomer(itemId2);
+        itemViewCustomer.setVisible(true);
+        this.dispose();
+        
         // TODO add your handling code here:
     }//GEN-LAST:event_view_item_2ActionPerformed
 
     private void view_item_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_view_item_3ActionPerformed
+
         // TODO add your handling code here:
+        ItemViewCustomer itemViewCustomer = new ItemViewCustomer(itemId3);
+        itemViewCustomer.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_view_item_3ActionPerformed
 
     private void view_item_4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_view_item_4ActionPerformed
+
         // TODO add your handling code here:
+        ItemViewCustomer itemViewCustomer = new ItemViewCustomer(itemId4);
+        itemViewCustomer.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_view_item_4ActionPerformed
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
