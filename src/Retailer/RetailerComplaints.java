@@ -6,6 +6,10 @@
 
 package Retailer;
 
+import db.Dbcon;
+import java.util.Date;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author USER
@@ -146,9 +150,32 @@ public class RetailerComplaints extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        HomePageRetailer homePageRetailer=new HomePageRetailer();
-        homePageRetailer.setVisible(true);
-        this.dispose();
+        String date = new Date().getTime()+"";
+        String Email=jTextField3.getText();
+        String complaints=jTextArea1.getText();
+        String orderInformation =jTextField4.getText();
+        String comments=jTextArea2.getText();
+        Dbcon d=new Dbcon();
+        String query="INSERT INTO complaints (created_user_id,created_user_type,description,comments,order_info,created_at) VALUES (3,'retailor','"+complaints+"','"+orderInformation+"','"+comments+"','"+date+"')";
+        
+        try {
+            int ii = d.insert(query);
+            if (ii > 0) {
+                JOptionPane.showMessageDialog(rootPane, "successfully registered your complaint");
+
+            }
+            else{
+                JOptionPane.showMessageDialog(rootPane,"could not register your complaint");
+            }
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+
+         
+       
+//        HomePageRetailer homePageRetailer=new HomePageRetailer();
+//        homePageRetailer.setVisible(true);
+//        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
