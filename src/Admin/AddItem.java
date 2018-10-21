@@ -17,6 +17,7 @@ import java.sql.PreparedStatement;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -342,6 +343,11 @@ public class AddItem extends javax.swing.JFrame {
             statement.setBlob(1, inputStream);
             statement.executeUpdate();
 
+            JOptionPane.showMessageDialog(rootPane, "Item added");
+            HomePageAdmin hp = new HomePageAdmin();
+            hp.setVisible(true);
+            this.dispose();
+            
         } catch (Exception e) {
             System.out.println(e);
         }
