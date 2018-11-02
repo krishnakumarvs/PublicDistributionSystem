@@ -6,18 +6,47 @@
 
 package Admin;
 
+import db.Dbcon;
+import java.sql.ResultSet;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author USER
  */
 public class RetailerBookingView extends javax.swing.JFrame {
 
+    String selected_order_id;
     /**
      * Creates new form RetailerBookingView
      */
     public RetailerBookingView() {
         initComponents();
          setLocationRelativeTo(null);
+         this.setTitle("Retailer bookings");
+         view_button.setEnabled(false);
+         loadAllRetailerBookings();
+    }
+    
+    private void loadAllRetailerBookings() {
+        try {
+            ResultSet rs = new Dbcon().select("SELECT orders.id as order_id, orders.*, users.name AS retailer_name, users.address AS retailer_address FROM retailer_orders AS orders, user_details AS users WHERE orders.retailer_id = users.id AND orders.order_status = 0;");
+            
+            int count = 0;
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            while(rs.next()) {
+                count++;
+                String retailer_name = rs.getString("retailer_name");
+                String retailer_address = rs.getString("retailer_address");
+                String no_of_items = rs.getString("no_of_items");
+                String created_at = rs.getString("created_at");
+                String items = rs.getString("items");
+                String order_id = rs.getString("order_id");
+                model.addRow(new String[]{ count+ "", retailer_name, retailer_address, no_of_items,created_at, items, order_id});
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -32,7 +61,8 @@ public class RetailerBookingView extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        view_button = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -40,20 +70,17 @@ public class RetailerBookingView extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
-                "SL NO", "Retailer ID", "Address", "No of items", "Booked date", "Options"
+                "Sl No", "Retailer", "Address", "No of items", "Booked date", "Items", "order_id"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -64,12 +91,35 @@ public class RetailerBookingView extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setMinWidth(50);
+            jTable1.getColumnModel().getColumn(0).setPreferredWidth(50);
+            jTable1.getColumnModel().getColumn(0).setMaxWidth(50);
+            jTable1.getColumnModel().getColumn(3).setMinWidth(80);
+            jTable1.getColumnModel().getColumn(3).setPreferredWidth(80);
+            jTable1.getColumnModel().getColumn(3).setMaxWidth(80);
+            jTable1.getColumnModel().getColumn(6).setMinWidth(0);
+            jTable1.getColumnModel().getColumn(6).setPreferredWidth(0);
+            jTable1.getColumnModel().getColumn(6).setMaxWidth(0);
+        }
 
-        jButton1.setText("View");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        view_button.setText("View");
+        view_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                view_buttonActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Back");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
             }
         });
 
@@ -78,40 +128,61 @@ public class RetailerBookingView extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(60, Short.MAX_VALUE)
+                .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 678, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(85, 85, 85)
-                                .addComponent(jLabel1))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 611, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(34, 34, 34))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(49, 49, 49))))
+                                .addComponent(view_button)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton2)))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(42, 42, 42)
+                .addGap(19, 19, 19)
                 .addComponent(jLabel1)
-                .addGap(28, 28, 28)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
-                .addContainerGap(168, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(view_button)
+                    .addComponent(jButton2))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void view_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_view_buttonActionPerformed
         // TODO add your handling code here:
-        RetailerItemsView retailerItemsView=new RetailerItemsView();
+        RetailerItemsView retailerItemsView=new RetailerItemsView(selected_order_id);
         retailerItemsView.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_view_buttonActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+        new HomePageAdmin().setVisible(true);
+        this.dispose();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+
+        int column = 6;
+        int row = jTable1.getSelectedRow();
+        String value = jTable1.getModel().getValueAt(row, column).toString();
+        System.out.println("value " + value);
+        selected_order_id = value;
+        view_button.setEnabled(true);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTable1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -149,9 +220,10 @@ public class RetailerBookingView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JButton view_button;
     // End of variables declaration//GEN-END:variables
 }

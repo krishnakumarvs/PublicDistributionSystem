@@ -6,7 +6,11 @@
 package Retailer;
 
 import db.Dbcon;
+import java.awt.Image;
+import java.io.InputStream;
+import java.sql.Blob;
 import java.sql.ResultSet;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -44,6 +48,20 @@ public class ViewItemRetailer extends javax.swing.JFrame {
                 int quantity = (int) quantity_spinner.getValue();
                 int price2 = Integer.parseInt(jLabel7.getText().trim());
                 jTextField2.setText((quantity * price2) + "");
+                
+                
+                Blob imageBlob = rs.getBlob("image");
+                if (imageBlob != null) {
+                    InputStream binaryStream = imageBlob.getBinaryStream(1, imageBlob.length());
+                    byte[] imageBytes = imageBlob.getBytes(1, (int) imageBlob.length());
+
+                    ImageIcon icon = new ImageIcon(imageBytes);
+
+                    Image sc = icon.getImage().getScaledInstance(photo_label_1.getWidth(), photo_label_1.getHeight(), Image.SCALE_DEFAULT);
+                    ImageIcon iconScaled = new ImageIcon(sc);
+                    photo_label_1.setIcon(iconScaled);
+                }
+                
             } else {
                 System.err.println("NO items ");
             }
@@ -67,13 +85,14 @@ public class ViewItemRetailer extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
+        photo_label_1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         quantity_spinner = new javax.swing.JSpinner();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -88,7 +107,7 @@ public class ViewItemRetailer extends javax.swing.JFrame {
 
         jTextField2.setEditable(false);
 
-        jLabel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        photo_label_1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jButton1.setText("Back");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -118,6 +137,8 @@ public class ViewItemRetailer extends javax.swing.JFrame {
 
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel8.setText("100");
+
+        jLabel2.setText("Rs");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -149,8 +170,11 @@ public class ViewItemRetailer extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel2)
+                                .addGap(2, 2, 2))
+                            .addComponent(photo_label_1, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(253, Short.MAX_VALUE))
         );
@@ -160,11 +184,12 @@ public class ViewItemRetailer extends javax.swing.JFrame {
                 .addGap(78, 78, 78)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(photo_label_1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jLabel7))
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -213,8 +238,8 @@ public class ViewItemRetailer extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        HomePageRetailer homePageRetailer = new HomePageRetailer();
-        homePageRetailer.setVisible(true);
+        OrderItemRetailer orderItemRetailer = new OrderItemRetailer();
+        orderItemRetailer.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -274,6 +299,7 @@ public class ViewItemRetailer extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JLabel photo_label_1;
     private javax.swing.JSpinner quantity_spinner;
     // End of variables declaration//GEN-END:variables
 }

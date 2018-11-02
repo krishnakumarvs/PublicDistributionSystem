@@ -5,6 +5,8 @@
  */
 package Retailer;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author USER
@@ -125,7 +127,10 @@ public class PaymenySub extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
+
+        JOptionPane.showMessageDialog(rootPane, "Payment sucessfull");
+        new HomePageRetailer().setVisible(true);
+        this.dispose();
 
     }//GEN-LAST:event_jButton1ActionPerformed
 

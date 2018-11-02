@@ -32,6 +32,7 @@ public class OrderItemRetailer extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         checkTotalNoOfItems();
         loadAllItems();
+        setTitle("Retailer orders");
     }
 
     public void checkTotalNoOfItems() {
@@ -80,7 +81,7 @@ public class OrderItemRetailer extends javax.swing.JFrame {
                 System.out.println("name " + itemName);
 
                 item_name_1.setText(rs.getString("name"));
-                item_price_1.setText(rs.getString("price_apl"));
+                item_price_1.setText(rs.getString("retailer_price") + " Rs");
                 itemId1 = Integer.parseInt(rs.getString("id"));
 
                 Blob imageBlob = rs.getBlob("image");
@@ -103,7 +104,7 @@ public class OrderItemRetailer extends javax.swing.JFrame {
                 System.out.println("name " + itemName);
 
                 item_name_2.setText(rs.getString("name"));
-                item_price_2.setText(rs.getString("price_apl"));
+                item_price_2.setText(rs.getString("retailer_price")  + " Rs");
                 itemId2 = Integer.parseInt(rs.getString("id"));
                 Blob imageBlob = rs.getBlob("image");
                 if (imageBlob != null) {
@@ -125,7 +126,7 @@ public class OrderItemRetailer extends javax.swing.JFrame {
                 System.out.println("name " + itemName);
 
                 item_name_3.setText(rs.getString("name"));
-                item_price_3.setText(rs.getString("price_apl"));
+                item_price_3.setText(rs.getString("retailer_price"));
                 itemId3 = Integer.parseInt(rs.getString("id"));
 
                 Blob imageBlob = rs.getBlob("image");
@@ -148,7 +149,7 @@ public class OrderItemRetailer extends javax.swing.JFrame {
                 System.out.println("name " + itemName);
 
                 item_name_4.setText(rs.getString("name"));
-                item_price_4.setText(rs.getString("price_apl"));
+                item_price_4.setText(rs.getString("retailer_price"));
                 itemId4 = Integer.parseInt(rs.getString("id"));
 
                 Blob imageBlob = rs.getBlob("image");
@@ -557,7 +558,7 @@ public class OrderItemRetailer extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
 
-        ViewCartItemsRetailer viewCartItems =  new ViewCartItemsRetailer();
+        ViewCartItemsRetailerClone2 viewCartItems =  new ViewCartItemsRetailerClone2();
         viewCartItems.setVisible(true);
         this.dispose();
         

@@ -215,7 +215,7 @@ public class HomePageRetailer extends javax.swing.JFrame {
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
-        ViewCartItemsRetailer viewCartItems=new ViewCartItemsRetailer();
+        ViewCartItemsRetailerClone2 viewCartItems=new ViewCartItemsRetailerClone2();
         viewCartItems.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
