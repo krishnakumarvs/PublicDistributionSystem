@@ -7,6 +7,7 @@
 package pds;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -32,15 +33,13 @@ public class Test {
 //        
 //        
 //        System.out.println("deleteQuery " + deleteQuery);
-        
-        List<Integer> myList = new ArrayList<Integer>();
-        myList.add(2);
-        myList.add(4);
-        myList.add(3);
-        
-        
-        
-        
+
+//        List<Integer> myList = new ArrayList<Integer>();
+//        myList.add(2);
+//        myList.add(4);
+//        myList.add(3);
+        Date d = new Date(Long.parseLong("1543516200000"));
+        System.out.println("d" + d);;
         
     }
     

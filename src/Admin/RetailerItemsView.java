@@ -7,6 +7,8 @@ package Admin;
 
 import db.Dbcon;
 import java.sql.ResultSet;
+import java.util.Date;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -38,7 +40,6 @@ public class RetailerItemsView extends javax.swing.JFrame {
             if (rs.next()) {
                 String items = rs.getString("items");
                 String items_quantities = rs.getString("items_quantities");
-
                 String[] itemsSplit = items.split(",");
                 String[] itemQuantitiesSplit = items_quantities.split(",");
 
@@ -47,6 +48,13 @@ public class RetailerItemsView extends javax.swing.JFrame {
 
                     model.addRow(new String[]{(i + 1) + "", itemsSplit[i], itemQuantitiesSplit[i]});
 
+                }
+
+                String date_of_delivery = rs.getString("date_of_delivery");
+                System.out.println("date_of_delivery " + date_of_delivery);
+                if (date_of_delivery != null) {
+                    Date date = new Date(Long.parseLong(date_of_delivery));
+                    jXDatePicker1.setDate(date);
                 }
 
             }
@@ -159,9 +167,22 @@ public class RetailerItemsView extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        HomePageAdmin homePageAdmin = new HomePageAdmin();
-        homePageAdmin.setVisible(true);
-        this.dispose();
+
+        if (jXDatePicker1.getDate() != null) {
+            String date_of_delivery = jXDatePicker1.getDate().getTime() + "";
+            int update = new Dbcon().update("update retailer_orders set date_of_delivery='" + date_of_delivery + "' where id=" + selected_order_id);
+            if (update != -1) {
+                JOptionPane.showMessageDialog(rootPane, "Sucessfully updated!");
+                HomePageAdmin homePageAdmin = new HomePageAdmin();
+                homePageAdmin.setVisible(true);
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Could not update, please try later");
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Please select a date");
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
