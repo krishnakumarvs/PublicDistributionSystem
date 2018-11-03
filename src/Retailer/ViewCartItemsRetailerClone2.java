@@ -126,6 +126,7 @@ public class ViewCartItemsRetailerClone2 extends javax.swing.JFrame {
                 jLabel2.setText(rs.getString("name"));
                 jLabel3.setText(rs.getString("retailer_price"));
                 itemId1 = Integer.parseInt(rs.getString("item_id"));
+                jLabel23.setText(itemId1 + "");
 
                 int aplAmount = Integer.parseInt(rs.getString("retailer_price"));
                 int quantity = Integer.parseInt(rs.getString("quantity"));
@@ -162,6 +163,7 @@ public class ViewCartItemsRetailerClone2 extends javax.swing.JFrame {
                 jLabel8.setText(rs.getString("name"));
                 jLabel9.setText(rs.getString("retailer_price"));
                 itemId2 = Integer.parseInt(rs.getString("item_id"));
+                jLabel25.setText(itemId2 + "");
 
                 int aplAmount = Integer.parseInt(rs.getString("retailer_price"));
                 int quantity = Integer.parseInt(rs.getString("quantity"));
@@ -225,6 +227,8 @@ public class ViewCartItemsRetailerClone2 extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jButton7 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
@@ -237,6 +241,8 @@ public class ViewCartItemsRetailerClone2 extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jButton8 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -321,6 +327,10 @@ public class ViewCartItemsRetailerClone2 extends javax.swing.JFrame {
             }
         });
 
+        jLabel22.setText("id");
+
+        jLabel23.setText("0");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -332,21 +342,24 @@ public class ViewCartItemsRetailerClone2 extends javax.swing.JFrame {
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel18)
                             .addComponent(jLabel19)
                             .addComponent(jLabel20)
-                            .addComponent(jLabel21))
+                            .addComponent(jLabel21)
+                            .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(26, 26, 26)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 12, Short.MAX_VALUE))
-                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 12, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -369,7 +382,11 @@ public class ViewCartItemsRetailerClone2 extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel22)
+                            .addComponent(jLabel23)))
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -410,6 +427,10 @@ public class ViewCartItemsRetailerClone2 extends javax.swing.JFrame {
             }
         });
 
+        jLabel24.setText("id");
+
+        jLabel25.setText("0");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -421,21 +442,24 @@ public class ViewCartItemsRetailerClone2 extends javax.swing.JFrame {
                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel31)
                             .addComponent(jLabel32)
                             .addComponent(jLabel33)
-                            .addComponent(jLabel34))
+                            .addComponent(jLabel34)
+                            .addComponent(jLabel24))
                         .addGap(26, 26, 26)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 12, Short.MAX_VALUE))
-                            .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 12, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -458,7 +482,11 @@ public class ViewCartItemsRetailerClone2 extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel24)
+                            .addComponent(jLabel25)))
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -552,12 +580,14 @@ public class ViewCartItemsRetailerClone2 extends javax.swing.JFrame {
         System.out.println("query for findin cart items to delete " + query);
         try {
             ResultSet rs = new Dbcon().select(query);
-            String items = "", itemsQuantities = "";
+            String items = "", itemsQuantities = "", itemIds = "";
             int itemsCount = 0;
             List<Integer> myList = new ArrayList<Integer>();
+
             while (rs.next()) {
                 items += rs.getString("name") + ",";
                 itemsQuantities += rs.getString("quantity") + ",";
+                itemIds += rs.getString("item_id") + ",";
 
                 myList.add(Integer.parseInt(rs.getString("id")));
                 System.out.println("adding  " + Integer.parseInt(rs.getString("id")) + " to cart items");
@@ -565,7 +595,7 @@ public class ViewCartItemsRetailerClone2 extends javax.swing.JFrame {
                 ++itemsCount;
             }
 
-            PaymentRetailerClone payment = new PaymentRetailerClone(totalAmount, items, itemsQuantities, itemsCount, myList);
+            PaymentRetailerClone payment = new PaymentRetailerClone(totalAmount, items, itemsQuantities, itemsCount, myList, itemIds);
             payment.setVisible(true);
             this.dispose();
 
@@ -586,7 +616,7 @@ public class ViewCartItemsRetailerClone2 extends javax.swing.JFrame {
         try {
             List<Integer> myList = new ArrayList<Integer>();
             myList.add(cartId1);
-            PaymentRetailerClone payment = new PaymentRetailerClone(itemAmount1, itemName1, jLabel4.getText(), 1, myList);
+            PaymentRetailerClone payment = new PaymentRetailerClone(itemAmount1, itemName1, jLabel4.getText(), 1, myList, jLabel23.getText());
             payment.setVisible(true);
             this.dispose();
 
@@ -629,7 +659,7 @@ public class ViewCartItemsRetailerClone2 extends javax.swing.JFrame {
         try {
             List<Integer> myList = new ArrayList<Integer>();
             myList.add(cartId2);
-            PaymentRetailerClone payment = new PaymentRetailerClone(itemAmount2, itemName2, jLabel10.getText(), 1, myList);
+            PaymentRetailerClone payment = new PaymentRetailerClone(itemAmount2, itemName2, jLabel10.getText(), 1, myList, jLabel25.getText());
             payment.setVisible(true);
             this.dispose();
 
@@ -707,6 +737,10 @@ public class ViewCartItemsRetailerClone2 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;

@@ -17,7 +17,7 @@ import java.util.List;
 public class PaymentRetailerClone extends javax.swing.JFrame {
 
     float amount;
-    String items, itemsQuantities;
+    String items, itemsQuantities,itemIds;
     int itemsCount;
 
     List<Integer> myList;
@@ -29,13 +29,14 @@ public class PaymentRetailerClone extends javax.swing.JFrame {
 
     }
 
-    public PaymentRetailerClone(float amount, String items, String itemsQuantities, int itemsCount, List<Integer> myList) {
+    public PaymentRetailerClone(float amount, String items, String itemsQuantities, int itemsCount, List<Integer> myList, String itemIds) {
         this.amount = amount;
         this.myList = myList;
         this.items = items;
         this.itemsCount = itemsCount;
         this.itemsQuantities = itemsQuantities;
-        System.out.println("itemsQuantities " + itemsQuantities);
+        this.itemIds = itemIds;
+        System.out.println("itemIds" + itemIds);
         initComponents();
         setLocationRelativeTo(null);
         jTextField1.setText(amount + "");
@@ -159,13 +160,14 @@ public class PaymentRetailerClone extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         try {
-            int inss = new Dbcon().insert("insert into retailer_orders (amount, retailer_id, payment_type, items,items_quantities, created_at,no_of_items ) "
+            int inss = new Dbcon().insert("insert into retailer_orders (amount, retailer_id, payment_type, items,items_quantities,item_ids, created_at,no_of_items ) "
                     + " values ("
                     + " " + amount + " , "
                     + " " + HomePageRetailer.retailerId + " , "
                     + " '" + (jRadioButton1.isSelected() ? jRadioButton1.getText() : jRadioButton2.getText()) + "' , "
                     + " '" + items + "' , "
                     + " '" + itemsQuantities + "' , "
+                    + " '" + itemIds + "' , "
                     + " '" + new Date().getTime() + "' ,  "
                     + "" + itemsCount + ""
                     + ")"
@@ -201,7 +203,7 @@ public class PaymentRetailerClone extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        ViewCartItemsRetailer viewCartItems = new ViewCartItemsRetailer();
+        ViewCartItemsRetailerClone2 viewCartItems = new ViewCartItemsRetailerClone2();
         viewCartItems.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
