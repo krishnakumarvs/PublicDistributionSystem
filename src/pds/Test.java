@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package pds;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import shared.SharedServices;
 
 /**
  *
@@ -38,11 +38,13 @@ public class Test {
 //        myList.add(2);
 //        myList.add(4);
 //        myList.add(3);
-        Date d = new Date(Long.parseLong("1543516200000"));
-        System.out.println("d" + d);;
-        
+//        Date d = new Date(Long.parseLong("1543516200000"));
+//        System.out.println("d" + d);;
+        String date = new Date().getTime() + "";
+        System.out.println("---> " + SharedServices.convertDate(date));
+
     }
-    
+
     static int[] toIntArray(List<Integer> list) {
         int[] ret = new int[list.size()];
         int i = 0;
@@ -51,5 +53,5 @@ public class Test {
         }
         return ret;
     }
-    
+
 }

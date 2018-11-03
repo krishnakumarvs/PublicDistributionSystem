@@ -170,7 +170,7 @@ public class RetailerItemsView extends javax.swing.JFrame {
 
         if (jXDatePicker1.getDate() != null) {
             String date_of_delivery = jXDatePicker1.getDate().getTime() + "";
-            int update = new Dbcon().update("update retailer_orders set date_of_delivery='" + date_of_delivery + "' where id=" + selected_order_id);
+            int update = new Dbcon().update("update retailer_orders set order_status = 1, date_of_delivery='" + date_of_delivery + "' where id=" + selected_order_id);
             if (update != -1) {
                 JOptionPane.showMessageDialog(rootPane, "Sucessfully updated!");
                 HomePageAdmin homePageAdmin = new HomePageAdmin();
