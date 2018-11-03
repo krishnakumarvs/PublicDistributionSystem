@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Admin;
+
+import db.Dbcon;
+import java.sql.ResultSet;
 
 /**
  *
@@ -12,12 +14,47 @@ package Admin;
  */
 public class RetailerApplicationNew extends javax.swing.JFrame {
 
+    String selectedRetailerId;
+
     /**
      * Creates new form RetailerApplicationNew
      */
     public RetailerApplicationNew() {
+
+    }
+
+    public RetailerApplicationNew(String selectedRetailerId) {
         initComponents();
-         setLocationRelativeTo(null);
+        setLocationRelativeTo(null);
+        this.selectedRetailerId = selectedRetailerId;
+        loadRetailerDetails();
+    }
+
+    private void loadRetailerDetails() {
+        try {
+            ResultSet rs = new Dbcon().select("select * from user_details where id = " + selectedRetailerId);
+            if(rs.next()) {
+                // rs.getString("name")
+                jTextField1.setText(rs.getString("name"));;
+                
+                jTextArea1.setText(rs.getString("address"));;
+                jTextField3.setText(rs.getString("firm_name_style"));;
+                jTextArea2.setText(rs.getString("premise_address"));;
+                jTextField7.setText(rs.getString("gender"));;
+                
+                jTextField2.setText(rs.getString("dob"));
+                jTextField6.setText(rs.getString("firm_category"));
+                
+                
+                jTextArea3.setText(rs.getString("godown_address"));
+                jTextField5.setText(rs.getString("legal_possession"));
+                
+                
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -39,8 +76,6 @@ public class RetailerApplicationNew extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea2 = new javax.swing.JTextArea();
-        jLabel7 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -74,8 +109,6 @@ public class RetailerApplicationNew extends javax.swing.JFrame {
         jTextArea2.setColumns(20);
         jTextArea2.setRows(5);
         jScrollPane2.setViewportView(jTextArea2);
-
-        jLabel7.setText("Age");
 
         jLabel8.setText("Gender");
 
@@ -142,17 +175,11 @@ public class RetailerApplicationNew extends javax.swing.JFrame {
                                 .addComponent(jLabel9)
                                 .addGap(170, 170, 170))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(130, 130, 130)
-                                        .addComponent(jLabel7))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jTextField7)
-                                        .addComponent(jTextField6, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(jTextField7, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
+                                        .addComponent(jTextField6, javax.swing.GroupLayout.Alignment.LEADING)))
                                 .addGap(37, 37, 37)))
                         .addGap(9, 9, 9)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -180,15 +207,12 @@ public class RetailerApplicationNew extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
-                            .addComponent(jLabel7)
                             .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel9)
                                 .addGap(3, 3, 3)
@@ -230,16 +254,16 @@ public class RetailerApplicationNew extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        RetailerApplication_2 retailerApplication_2=new RetailerApplication_2();
+        RetailerApplication_2 retailerApplication_2 = new RetailerApplication_2(selectedRetailerId);
         retailerApplication_2.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        HomePageAdmin homePageAdmin=new HomePageAdmin();
-        homePageAdmin.setVisible(true);
-        this.dispose();
+        NewRetailerApplication homePageAdmin = new NewRetailerApplication();
+            homePageAdmin.setVisible(true);
+            this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -289,7 +313,6 @@ public class RetailerApplicationNew extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
@@ -301,7 +324,6 @@ public class RetailerApplicationNew extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;

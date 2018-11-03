@@ -3,8 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Admin;
+
+import db.Dbcon;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -12,12 +15,37 @@ package Admin;
  */
 public class RetailerApplication_2 extends javax.swing.JFrame {
 
+    String selectedRetailerId;
+
     /**
      * Creates new form RetailerApplication_2
      */
     public RetailerApplication_2() {
+
+    }
+
+    public RetailerApplication_2(String selectedRetailerId) {
         initComponents();
-         setLocationRelativeTo(null);
+        setLocationRelativeTo(null);
+        this.selectedRetailerId = selectedRetailerId;
+        loadRetailerDetails();
+    }
+
+    private void loadRetailerDetails() {
+        try {
+            ResultSet rs = new Dbcon().select("select * from user_details where id = " + selectedRetailerId);
+            if (rs.next()) {
+                // rs.getString("name")
+                jTextField2.setText(rs.getString("ownership_type"));;
+
+                jTextArea1.setText(rs.getString("licence_info"));;
+                jTextField1.setText(rs.getString("financial_sound_details"));;
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -60,7 +88,7 @@ public class RetailerApplication_2 extends javax.swing.JFrame {
 
         jButton2.setText("View Proof");
 
-        jButton3.setText("Send");
+        jButton3.setText("Home");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -164,35 +192,42 @@ public class RetailerApplication_2 extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        RejectReason rejectReason=new RejectReason();
+        RejectReason rejectReason = new RejectReason(selectedRetailerId);
         rejectReason.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-        RetailerApplicationNew retailerApplicationNew=new RetailerApplicationNew();
+        RetailerApplicationNew retailerApplicationNew = new RetailerApplicationNew(selectedRetailerId);
         retailerApplicationNew.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        HomePageAdmin homePageAdmin=new HomePageAdmin();
+        HomePageAdmin homePageAdmin = new HomePageAdmin();
         homePageAdmin.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-         HomePageAdmin homePageAdmin=new HomePageAdmin();
-        homePageAdmin.setVisible(true);
-        this.dispose();
+
+        try {
+            new Dbcon().update("update user_details set approved_status = 1 where id = " + selectedRetailerId);
+            JOptionPane.showMessageDialog(rootPane, "Sucessfully approved the retailer");
+            NewRetailerApplication homePageAdmin = new NewRetailerApplication();
+            homePageAdmin.setVisible(true);
+            this.dispose();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
-        NewRetailerApplication newRetailerApplication=new NewRetailerApplication();
+        NewRetailerApplication newRetailerApplication = new NewRetailerApplication();
         newRetailerApplication.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton7ActionPerformed

@@ -13,13 +13,13 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author USER
  */
-public class NewRetailerApplication extends javax.swing.JFrame {
+public class RejectedRetailers extends javax.swing.JFrame {
 
     String selectedRetailerId = null;
     /**
      * Creates new form NewRetailerApplication
      */
-    public NewRetailerApplication() {
+    public RejectedRetailers() {
         initComponents();
         setLocationRelativeTo(null);
         jButton1.setEnabled(false);
@@ -29,7 +29,7 @@ public class NewRetailerApplication extends javax.swing.JFrame {
 
     private void loadAllApplicants() {
         try {
-            ResultSet rs = new Dbcon().select("select * from user_details where user_type='retailer' and approved_status=0");
+            ResultSet rs = new Dbcon().select("select * from user_details where user_type='retailer' and approved_status=2");
 
             
             DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
@@ -187,20 +187,20 @@ public class NewRetailerApplication extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NewRetailerApplication.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RejectedRetailers.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NewRetailerApplication.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RejectedRetailers.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NewRetailerApplication.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RejectedRetailers.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NewRetailerApplication.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RejectedRetailers.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NewRetailerApplication().setVisible(true);
+                new RejectedRetailers().setVisible(true);
             }
         });
     }

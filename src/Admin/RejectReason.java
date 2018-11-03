@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Admin;
+
+import db.Dbcon;
+import java.sql.ResultSet;
 
 /**
  *
@@ -12,12 +14,33 @@ package Admin;
  */
 public class RejectReason extends javax.swing.JFrame {
 
+    String selectedRetailerId;
+
     /**
      * Creates new form RejectReason
      */
     public RejectReason() {
+
+    }
+
+    public RejectReason(String selectedRetailerId) {
         initComponents();
-         setLocationRelativeTo(null);
+        setLocationRelativeTo(null);
+        this.selectedRetailerId = selectedRetailerId;
+        loadRetailerDetails();
+    }
+
+    private void loadRetailerDetails() {
+        try {
+            ResultSet rs = new Dbcon().select("select * from user_details where id = " + selectedRetailerId);
+            if (rs.next()) {
+                // rs.getString("name")
+                jTextField1.setText(rs.getString("name"));;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -116,9 +139,15 @@ public class RejectReason extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        HomePageAdmin homePageAdmin=new HomePageAdmin();
-        homePageAdmin.setVisible(true);
-        this.dispose();
+
+        try {
+            new Dbcon().update("update user_details set approved_status = 2, rejected_reason = '" + jTextArea1.getText() + "' where id = " + selectedRetailerId);
+            NewRetailerApplication homePageAdmin = new NewRetailerApplication();
+            homePageAdmin.setVisible(true);
+            this.dispose();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
