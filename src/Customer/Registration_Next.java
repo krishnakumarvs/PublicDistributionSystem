@@ -32,7 +32,6 @@ public class Registration_Next extends javax.swing.JFrame {
 
     public Registration_Next() {
         initComponents();
-        add_panel.setVisible(false);
 
     }
 
@@ -40,6 +39,7 @@ public class Registration_Next extends javax.swing.JFrame {
 
         this.userid = userid;
         initComponents();
+        this.setLocationRelativeTo(null);
         add_panel.setVisible(false);
     }
 
@@ -396,7 +396,7 @@ public class Registration_Next extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
                             .addComponent(jButton1))
@@ -417,9 +417,8 @@ public class Registration_Next extends javax.swing.JFrame {
                         .addGap(13, 13, 13)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel10)
-                            .addComponent(jButton4))
-                        .addContainerGap(103, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
+                            .addComponent(jButton4)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(jLabel11)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(username_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -435,8 +434,8 @@ public class Registration_Next extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton5)
                             .addComponent(jButton6)
-                            .addComponent(jButton7))
-                        .addContainerGap(101, Short.MAX_VALUE))))
+                            .addComponent(jButton7))))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         pack();
@@ -467,7 +466,7 @@ public class Registration_Next extends javax.swing.JFrame {
 //                    + "" + monthlyOtherPrice + " , "
 //                    + "" + monthlyItem + " , "
 //                    + " ?)";
-            String query = "update user_details set no_of_family_members='" + nofamilymember + "',user_name='" + username + "',password=' " + confirm_password + "' , address_proof_doc = ?, age_certificate_doc = ? , annual_income_doc = ? , aadhaar_doc = ?  where id='" + userid + "'";
+            String query = "update user_details set no_of_family_members='" + nofamilymember + "',user_name='" + username + "',password='" + confirm_password + "' , address_proof_doc = ?, age_certificate_doc = ? , annual_income_doc = ? , aadhaar_doc = ?  where id='" + userid + "'";
             System.out.println(query);
             try {
 

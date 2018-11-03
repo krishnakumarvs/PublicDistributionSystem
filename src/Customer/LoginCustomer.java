@@ -53,7 +53,7 @@ public class LoginCustomer extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
         jLabel2.setText("User Name");
 
-        username_textfield.setText("123");
+        username_textfield.setText("monu");
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
         jLabel3.setText("Password");
@@ -176,7 +176,7 @@ public class LoginCustomer extends javax.swing.JFrame {
         String password;
         String username;
         username = username_textfield.getText();
-        password = password_field.getText();
+        password = password_field.getText().trim();
         System.out.println(username);
         System.out.println(password);
 
@@ -189,10 +189,18 @@ public class LoginCustomer extends javax.swing.JFrame {
             String userid;
             if (rs.next()) {
                 userid = rs.getString("id");
+                String approved_status = rs.getString("approved_status");
 
-                HomePageCustomer homePageCustomer = new HomePageCustomer(userid);
-                homePageCustomer.setVisible(true);
-                this.dispose();
+                if (approved_status.equals("0")) {
+                    JOptionPane.showMessageDialog(rootPane, "Your account is not approved yet. Please contact admin");
+                } else if (approved_status.equals("1")) {
+                    HomePageCustomer homePageCustomer = new HomePageCustomer(userid);
+                    homePageCustomer.setVisible(true);
+                    this.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, "Your account is disabled for reason " + rs.getString("rejected_reason") + " . Please conract admin for further details");
+                }
+
             } else {
                 //System.out.println("Invalid User...");
                 JOptionPane.showMessageDialog(rootPane, "Invalid User..");

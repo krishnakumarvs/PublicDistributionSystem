@@ -3,8 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Admin;
+
+import db.Dbcon;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -12,12 +15,51 @@ package Admin;
  */
 public class CustomerApplicationView extends javax.swing.JFrame {
 
+    String selectedCustomerId;
+
     /**
      * Creates new form CustomerApplicationView
      */
     public CustomerApplicationView() {
+
+    }
+
+    public CustomerApplicationView(String selectedCustomerId) {
         initComponents();
-         setLocationRelativeTo(null);
+        this.selectedCustomerId = selectedCustomerId;
+        setLocationRelativeTo(null);
+        loadCustomerDetails();
+    }
+
+    private void loadCustomerDetails() {
+        try {
+            ResultSet rs = new Dbcon().select("select * from user_details where id =" + selectedCustomerId);
+            if (rs.next()) {
+                jTextField1.setText(rs.getString("name"));
+
+                jTextArea2.setText(rs.getString("address"));
+                jTextField3.setText(rs.getString("place"));
+
+                jTextField2.setText(rs.getString("district"));
+
+                jTextField4.setText(rs.getString("aadhar_num"));
+
+                jTextField10.setText(rs.getString("no_of_family_members"));
+
+                jTextField5.setText(rs.getString("mobile_num"));
+
+                jTextField6.setText(rs.getString("email"));
+
+                jTextField11.setText(rs.getString("gender"));
+
+                jTextField7.setText(rs.getString("house_num"));
+
+                jTextField8.setText(rs.getString("occupation"));
+
+            }
+        } catch (Exception r) {
+            r.printStackTrace();
+        }
     }
 
     /**
@@ -122,14 +164,19 @@ public class CustomerApplicationView extends javax.swing.JFrame {
         jButton2.setText("View");
 
         jButton3.setText("View");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("view");
 
         jButton5.setText("View");
 
-        jLabel18.setText("Age");
+        jLabel18.setText("Gender");
 
-        jButton6.setText("Send");
+        jButton6.setText("Back");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
@@ -335,38 +382,48 @@ public class CustomerApplicationView extends javax.swing.JFrame {
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
-        RejectReason rejectReason=new RejectReason();
+        RejectReason rejectReason = new RejectReason();
         rejectReason.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-        HomePageAdmin homePageAdmin=new HomePageAdmin();
-        homePageAdmin.setVisible(true);
-        this.dispose();
+        goBack();
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+
         // TODO add your handling code here:
-         HomePageAdmin homePageAdmin=new HomePageAdmin();
-        homePageAdmin.setVisible(true);
-        this.dispose();
+        try {
+            new Dbcon().update("update user_details set approved_status = 1 where id = " + selectedCustomerId);
+            JOptionPane.showMessageDialog(rootPane, "User activation success!");
+            goBack();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void goBack() {
+        new NewCustomerApplication().setVisible(true);
+        this.dispose();
+    }
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
-        NewCustomerApplication newCustomerApplication=new NewCustomerApplication();
-        newCustomerApplication.setVisible(true);
-        this.dispose();
+        goBack();
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        ViewMemberDetails viewMemberDetails=new ViewMemberDetails();
+        ViewMemberDetails viewMemberDetails = new ViewMemberDetails(selectedCustomerId);
         viewMemberDetails.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
