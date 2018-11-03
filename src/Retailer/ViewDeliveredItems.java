@@ -7,6 +7,7 @@ package Retailer;
 
 import db.Dbcon;
 import java.sql.ResultSet;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import shared.SharedServices;
 
@@ -15,6 +16,8 @@ import shared.SharedServices;
  * @author USER
  */
 public class ViewDeliveredItems extends javax.swing.JFrame {
+
+    String selectedOrderId = null, selectedItem_ids = null, selectedItems_quantities;
 
     /**
      * Creates new form ViewDeliveredItems
@@ -39,9 +42,14 @@ public class ViewDeliveredItems extends javax.swing.JFrame {
                 String no_of_items = rs.getString("no_of_items");
                 String created_at = SharedServices.convertDate(rs.getString("created_at"));
                 String items = rs.getString("items");
-                String order_id = SharedServices.convertDate(rs.getString("date_of_delivery"));
-                String order_status = rs.getString("order_status").equals("0") ? "Not Granted" : "Granted";
-                model.addRow(new String[]{count + "", retailer_name, retailer_address, no_of_items, created_at, items, order_id, order_status});
+                String date_of_delivery = SharedServices.convertDate(rs.getString("date_of_delivery"));
+                String order_status = SharedServices.getOrderStatusMessage(rs.getString("order_status"));
+
+                String item_ids = rs.getString("item_ids");
+                String order_id = rs.getString("order_id");
+                String items_quantities = rs.getString("items_quantities");
+
+                model.addRow(new String[]{count + "", retailer_name, retailer_address, no_of_items, created_at, items, date_of_delivery, order_status, item_ids, order_id, items_quantities});
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -79,14 +87,14 @@ public class ViewDeliveredItems extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Sl No", "Retailer", "Address", "No of items", "Booked date", "Items", "Delivery date", "Order Status"
+                "Sl No", "Retailer", "Address", "No of items", "Booked date", "Items", "Delivery date", "Order Status", "itemIds", "order id", "quantities"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, true
+                false, false, false, false, false, false, false, true, true, true, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -103,6 +111,17 @@ public class ViewDeliveredItems extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(8).setMinWidth(0);
+            jTable1.getColumnModel().getColumn(8).setPreferredWidth(0);
+            jTable1.getColumnModel().getColumn(8).setMaxWidth(0);
+            jTable1.getColumnModel().getColumn(9).setMinWidth(0);
+            jTable1.getColumnModel().getColumn(9).setPreferredWidth(0);
+            jTable1.getColumnModel().getColumn(9).setMaxWidth(0);
+            jTable1.getColumnModel().getColumn(10).setMinWidth(0);
+            jTable1.getColumnModel().getColumn(10).setPreferredWidth(0);
+            jTable1.getColumnModel().getColumn(10).setMaxWidth(0);
+        }
 
         received_button.setText("Confirm Received ");
         received_button.addActionListener(new java.awt.event.ActionListener() {
@@ -155,19 +174,70 @@ public class ViewDeliveredItems extends javax.swing.JFrame {
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
 
-        
-        int column = 0;
         int row = jTable1.getSelectedRow();
-        String value = jTable1.getModel().getValueAt(row, column).toString();
-        
-        received_button.setEnabled(true);
-        
+        selectedOrderId = jTable1.getModel().getValueAt(row, 9).toString();
+        selectedItem_ids = jTable1.getModel().getValueAt(row, 8).toString();
+
+        selectedItems_quantities = jTable1.getModel().getValueAt(row, 10).toString();
+
+        String orderStatus = jTable1.getModel().getValueAt(row, 7).toString();
+        if (orderStatus.trim().equals("Granted")) {
+            received_button.setEnabled(true);
+        } else {
+            received_button.setEnabled(false);
+        }
+
+        System.out.println("orderStatus " + orderStatus);
+        System.out.println("selectedOrderId " + selectedOrderId);
+        System.out.println("selectedItem_ids " + selectedItem_ids);
+        System.out.println("selectedItems_quantities " + selectedItems_quantities);
+
         // TODO add your handling code here:
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void received_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_received_buttonActionPerformed
 
-        
+        // selectedItem_ids , selectedOrderId
+        Dbcon d = new Dbcon();
+        Dbcon d2 = new Dbcon();
+        try {
+            int update = d.update("update retailer_orders set order_status = 2 where id = " + selectedOrderId);
+            if (update > 0) {
+                String[] selectedItemsIdArray = selectedItem_ids.split(",");
+                String[] selectedItems_quantitiesArray = selectedItems_quantities.split(",");
+                for (int i = 0; i < selectedItemsIdArray.length; i++) {
+                    String itemId = selectedItemsIdArray[i];
+                    String quantity = selectedItems_quantitiesArray[i];
+                    ResultSet rs = d2.select("select * from retailer_items where item_id=" + itemId + " and retailer_id=" + HomePageRetailer.retailerId);
+                    if (rs.next()) {
+                        // item already there in the retailer items
+                        // so update the count
+                        String retailerItemId = rs.getString("id");
+                        String retailerItemQunatity = rs.getString("quantity");
+                        d2.update("update retailer_items set quantity = quantity + " + quantity + " where id = " + retailerItemId);
+
+                    } else {
+                        // item not there in the retailer items
+                        // so add ne entry
+                        d2.insert("insert into retailer_items (item_id, quantity, retailer_id) values ("
+                                + " " + itemId + " , "
+                                + " " + quantity + " , "
+                                + " " + HomePageRetailer.retailerId + "  "
+                                + ""
+                                + ")");
+                    }
+                    //
+
+                }
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Error. Please try again later");
+            }
+            SharedServices.clearRows(jTable1);
+            loadAllRetailerBookings();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         // TODO add your handling code here:
     }//GEN-LAST:event_received_buttonActionPerformed
 

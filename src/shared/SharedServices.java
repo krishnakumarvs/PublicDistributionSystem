@@ -35,4 +35,21 @@ public class SharedServices {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.setRowCount(0);
     }
+
+    public static String getOrderStatusMessage(String orderStatusId) {
+        String orderStatus = "";
+        if (orderStatusId == null) {
+            orderStatus = "null";
+        } else {
+            if (orderStatusId.equals("0")) {
+                orderStatus = "Not Granted";
+            } else if (orderStatusId.equals("1")) {
+                orderStatus = "Granted";
+            } else if (orderStatusId.equals("2")) {
+                orderStatus = "Received";
+            }
+        }
+
+        return orderStatus;
+    }
 }

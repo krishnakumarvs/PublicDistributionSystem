@@ -84,7 +84,7 @@
         <Component class="javax.swing.JTable" name="jTable1">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="8" rowCount="0">
+              <Table columnCount="11" rowCount="0">
                 <Column editable="false" title="Sl No" type="java.lang.String"/>
                 <Column editable="false" title="Retailer" type="java.lang.String"/>
                 <Column editable="false" title="Address" type="java.lang.String"/>
@@ -93,6 +93,9 @@
                 <Column editable="false" title="Items" type="java.lang.String"/>
                 <Column editable="false" title="Delivery date" type="java.lang.String"/>
                 <Column editable="true" title="Order Status" type="java.lang.Object"/>
+                <Column editable="true" title="itemIds" type="java.lang.Object"/>
+                <Column editable="true" title="order id" type="java.lang.Object"/>
+                <Column editable="true" title="quantities" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -133,6 +136,21 @@
                   <Renderer/>
                 </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="0" minWidth="0" prefWidth="0" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="0" minWidth="0" prefWidth="0" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="0" minWidth="0" prefWidth="0" resizable="true">
                   <Title/>
                   <Editor/>
                   <Renderer/>
