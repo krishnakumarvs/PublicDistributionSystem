@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Retailer;
 
 import pds.HomePage;
@@ -13,16 +12,17 @@ import pds.HomePage;
  * @author USER
  */
 public class HomePageRetailer extends javax.swing.JFrame {
+
     public static int retailerId;
+
     /**
      * Creates new form HomePageRetailer
      */
     public HomePageRetailer() {
         initComponents();
         this.setTitle("Retailer - Home");
-         setLocationRelativeTo(null);
+        setLocationRelativeTo(null);
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -84,7 +84,7 @@ public class HomePageRetailer extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItem2);
 
-        jMenuItem3.setText("Delivered");
+        jMenuItem3.setText("Order Status");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem3ActionPerformed(evt);
@@ -201,96 +201,96 @@ public class HomePageRetailer extends javax.swing.JFrame {
 
     private void jMenu9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu9MouseClicked
         // TODO add your handling code here:
-        TodaysOrders todaysOrders=new TodaysOrders();
+        TodaysOrders todaysOrders = new TodaysOrders();
         todaysOrders.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jMenu9MouseClicked
 
     private void jMenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu3ActionPerformed
         // TODO add your handling code here:
-        ViewItemRetailer viewItemRetailer=new ViewItemRetailer();
+        ViewItemRetailer viewItemRetailer = new ViewItemRetailer();
         viewItemRetailer.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jMenu3ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
-        ViewCartItemsRetailerClone2 viewCartItems=new ViewCartItemsRetailerClone2();
+        ViewCartItemsRetailerClone2 viewCartItems = new ViewCartItemsRetailerClone2();
         viewCartItems.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // TODO add your handling code here:
-        ViewDeliveredItems viewDeliveredItems=new ViewDeliveredItems();
+        ViewDeliveredItems viewDeliveredItems = new ViewDeliveredItems();
         viewDeliveredItems.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         // TODO add your handling code here:
-        CustomerBookedItems customerBookedItems=new CustomerBookedItems();
+        CustomerBookedItems customerBookedItems = new CustomerBookedItems();
         customerBookedItems.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         // TODO add your handling code here:
-        CustomerGrantedItems customerGrantedItems=new CustomerGrantedItems();
+        CustomerGrantedItems customerGrantedItems = new CustomerGrantedItems();
         customerGrantedItems.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenu8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu8ActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_jMenu8ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         // TODO add your handling code here:
-        CustomerDeliveryDetails customerDeliveryDetails=new CustomerDeliveryDetails();
+        CustomerDeliveryDetails customerDeliveryDetails = new CustomerDeliveryDetails();
         customerDeliveryDetails.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenu6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu6ActionPerformed
         // TODO add your handling code here:
-        
-                
+
+
     }//GEN-LAST:event_jMenu6ActionPerformed
 
     private void jMenu6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu6MouseClicked
         // TODO add your handling code here:
-        RetailerComplaints retailerComplaints=new RetailerComplaints();
+        RetailerComplaints retailerComplaints = new RetailerComplaints();
         retailerComplaints.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jMenu6MouseClicked
 
     private void jMenu7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu7MouseClicked
         // TODO add your handling code here:
-        HomePage homePage=new HomePage();
+        HomePage homePage = new HomePage();
         homePage.setVisible(true);
         this.dispose();
-                
+
     }//GEN-LAST:event_jMenu7MouseClicked
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
-       OrderItemRetailer orderItem=new OrderItemRetailer();
-       orderItem.setVisible(true);
+        OrderItemRetailer orderItem = new OrderItemRetailer();
+        orderItem.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
         // TODO add your handling code here:
-        ViewDeliveredItems viewDelivedItems=new ViewDeliveredItems();
+        ViewDeliveredItems viewDelivedItems = new ViewDeliveredItems();
         viewDelivedItems.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
         // TODO add your handling code here:
-        ViewPaymentDetails viewPaymentDetails=new ViewPaymentDetails();
+        ViewPaymentDetails viewPaymentDetails = new ViewPaymentDetails();
         viewPaymentDetails.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jMenuItem10ActionPerformed

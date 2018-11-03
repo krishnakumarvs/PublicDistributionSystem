@@ -20,10 +20,15 @@ public class SharedServices {
     static String dateFormat = "dd-MMM-yyyy";
 
     public static String convertDate(String timeStamp) {
-        long time = Long.parseLong(timeStamp);
-        Date d = new Date((long) time);
-        DateFormat f = new SimpleDateFormat(dateFormat);
-        return f.format(d);
+        try {
+            long time = Long.parseLong(timeStamp);
+            Date d = new Date((long) time);
+            DateFormat f = new SimpleDateFormat(dateFormat);
+            return f.format(d);
+        } catch (NumberFormatException e) {
+            return "-";
+        }
+
     }
 
     public static void clearRows(JTable table) {
