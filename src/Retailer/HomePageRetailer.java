@@ -63,7 +63,7 @@ public class HomePageRetailer extends javax.swing.JFrame {
             }
         });
 
-        jMenuItem1.setText("New");
+        jMenuItem1.setText("New Order");
         jMenuItem1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jMenuItem1MouseClicked(evt);
@@ -76,7 +76,7 @@ public class HomePageRetailer extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItem1);
 
-        jMenuItem2.setText("Booked");
+        jMenuItem2.setText("Cart Items");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem2ActionPerformed(evt);
