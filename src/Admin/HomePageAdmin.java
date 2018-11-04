@@ -50,7 +50,6 @@ public class HomePageAdmin extends javax.swing.JFrame {
         jMenuItem11 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem14 = new javax.swing.JMenuItem();
         jMenu10 = new javax.swing.JMenu();
         jMenu1 = new javax.swing.JMenu();
         jMenu7 = new javax.swing.JMenu();
@@ -166,10 +165,6 @@ public class HomePageAdmin extends javax.swing.JFrame {
         jMenu6.setText("View");
 
         jMenu2.setText("Customer");
-
-        jMenuItem14.setText("jMenuItem14");
-        jMenu2.add(jMenuItem14);
-
         jMenu6.add(jMenu2);
 
         jMenu10.setText("Retailer");
@@ -372,7 +367,6 @@ public class HomePageAdmin extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem12;
-    private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;

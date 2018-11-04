@@ -8,6 +8,7 @@ package Admin;
 import db.Dbcon;
 import java.sql.ResultSet;
 import javax.swing.table.DefaultTableModel;
+import shared.SharedServices;
 
 /**
  *
@@ -16,6 +17,7 @@ import javax.swing.table.DefaultTableModel;
 public class NewCustomerApplication extends javax.swing.JFrame {
 
     String selectedCustomerId;
+
     /**
      * Creates new form NewCustomerApplication
      */
@@ -25,11 +27,11 @@ public class NewCustomerApplication extends javax.swing.JFrame {
         jButton1.setEnabled(false);
         loadUsers();
     }
-    
+
     private void loadUsers() {
         try {
-            ResultSet rs = new Dbcon().select("select * from user_details where user_type='customer' and approved_status = 0");
-            
+            ResultSet rs = new Dbcon().select("select * from user_details where user_type='customer' and approved_status = 0 and name like'%" + search_text_feild.getText() + "%'");
+
             DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
             int count = 0;
             while (rs.next()) {
@@ -40,7 +42,7 @@ public class NewCustomerApplication extends javax.swing.JFrame {
                 String district = rs.getString("district");
                 String no_of_family_members = rs.getString("no_of_family_members");
                 String userId = rs.getString("id");
-                
+
                 model.addRow(new String[]{count + "", name, address, gender, district, no_of_family_members, userId});
             }
         } catch (Exception e) {
@@ -62,7 +64,7 @@ public class NewCustomerApplication extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        search_text_feild = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -112,6 +114,11 @@ public class NewCustomerApplication extends javax.swing.JFrame {
         });
 
         jButton3.setText("Search");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -125,7 +132,7 @@ public class NewCustomerApplication extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton1))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(search_text_feild, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jButton3))
                     .addComponent(jLabel1)
@@ -139,7 +146,7 @@ public class NewCustomerApplication extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(search_text_feild, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 357, Short.MAX_VALUE)
@@ -169,13 +176,19 @@ public class NewCustomerApplication extends javax.swing.JFrame {
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
 
-        
         int row = jTable1.getSelectedRow();
         selectedCustomerId = jTable1.getModel().getValueAt(row, 6).toString();
         jButton1.setEnabled(true);
-        
+
 // TODO add your handling code here:
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+
+        SharedServices.clearRows(jTable1);
+        loadUsers();
+// TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -219,6 +232,6 @@ public class NewCustomerApplication extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField search_text_feild;
     // End of variables declaration//GEN-END:variables
 }
