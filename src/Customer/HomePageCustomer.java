@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Customer;
 
 import pds.HomePage;
@@ -13,22 +12,21 @@ import pds.HomePage;
  * @author USER
  */
 public class HomePageCustomer extends javax.swing.JFrame {
+
     public static String userid;
+    public static String retailerId;
+
     /**
      * Creates new form HomePageCustomer
      */
-    public HomePageCustomer() {
-        //initComponents();
-         
-    }
 
-     public HomePageCustomer(String userid) {
-         
-         this.userid=userid;
-        // System.out.println(userid);
+    public HomePageCustomer() {
+
+        this.userid = userid;
         initComponents();
         setLocationRelativeTo(null);
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -234,115 +232,115 @@ public class HomePageCustomer extends javax.swing.JFrame {
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
-        MonthlyItemOrder monthlyItemOrder=new MonthlyItemOrder();
+        MonthlyItemOrder monthlyItemOrder = new MonthlyItemOrder();
         monthlyItemOrder.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // TODO add your handling code here:
-        OtherItemOrder otherItemOrder=new OtherItemOrder();
+        OtherItemOrder otherItemOrder = new OtherItemOrder();
         otherItemOrder.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         // TODO add your handling code here:
-        Payment payment=new Payment();
+        Payment payment = new Payment();
         payment.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
         // TODO add your handling code here:
-        EditDetails editDetails=new EditDetails();
+        EditDetails editDetails = new EditDetails();
         editDetails.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
         // TODO add your handling code here:
-        AddMember addMember=new AddMember();
+        AddMember addMember = new AddMember();
         addMember.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
         // TODO add your handling code here:
-        DeleteMemeber deleteMemeber=new DeleteMemeber();
+        DeleteMemeber deleteMemeber = new DeleteMemeber();
         deleteMemeber.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
         // TODO add your handling code here:
-        ChangeOwner changeOwner=new ChangeOwner();
+        ChangeOwner changeOwner = new ChangeOwner();
         changeOwner.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jMenuItem11ActionPerformed
 
     private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
         // TODO add your handling code here:
-        ChangeAddress changeAddress=new ChangeAddress();
+        ChangeAddress changeAddress = new ChangeAddress();
         changeAddress.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jMenuItem12ActionPerformed
 
     private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
         // TODO add your handling code here:
-        ChangePassword changePassword=new ChangePassword(userid);
+        ChangePassword changePassword = new ChangePassword();
         changePassword.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jMenuItem13ActionPerformed
 
     private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
         // TODO add your handling code here:
-        EditMemberDetails editMemberDetails=new EditMemberDetails();
+        EditMemberDetails editMemberDetails = new EditMemberDetails();
         editMemberDetails.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jMenuItem14ActionPerformed
 
     private void jMenu28ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu28ActionPerformed
         // TODO add your handling code here:
-       
+
     }//GEN-LAST:event_jMenu28ActionPerformed
 
     private void jMenu29ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu29ActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_jMenu29ActionPerformed
 
     private void jMenu28MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu28MouseClicked
         // TODO add your handling code here:
-         CustomerComplaints customerComplaints=new CustomerComplaints(userid);
+        CustomerComplaints customerComplaints = new CustomerComplaints();
         customerComplaints.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jMenu28MouseClicked
 
     private void jMenu29MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu29MouseClicked
         // TODO add your handling code here:
-        HomePage homePage=new HomePage();
+        HomePage homePage = new HomePage();
         homePage.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jMenu29MouseClicked
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         // TODO add your handling code here:
-        ViewCartItems viewCartItems=new ViewCartItems();
+        ViewCartItems viewCartItems = new ViewCartItems();
         viewCartItems.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
-         DeliveryDetails deliveryDetails=new DeliveryDetails();
+        DeliveryDetails deliveryDetails = new DeliveryDetails();
         deliveryDetails.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
         // TODO add your handling code here:
-        PaymentView paymentView=new PaymentView();
+        PaymentView paymentView = new PaymentView();
         paymentView.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jMenuItem15ActionPerformed

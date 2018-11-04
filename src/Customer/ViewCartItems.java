@@ -530,7 +530,7 @@ public class ViewCartItems extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-        HomePageCustomer homePageCustomer = new HomePageCustomer(HomePageCustomer.userid);
+        HomePageCustomer homePageCustomer = new HomePageCustomer();
         homePageCustomer.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton6ActionPerformed
@@ -544,7 +544,7 @@ public class ViewCartItems extends javax.swing.JFrame {
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
-        HomePageCustomer homePageCustomer = new HomePageCustomer(HomePageCustomer.userid);
+        HomePageCustomer homePageCustomer = new HomePageCustomer();
         homePageCustomer.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton9ActionPerformed

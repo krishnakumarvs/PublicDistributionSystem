@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Customer;
 
 import db.Dbcon;
@@ -21,31 +20,32 @@ import javax.swing.JOptionPane;
 public class ItemViewCustomer extends javax.swing.JFrame {
 
     int itemId = 0;
+
     /**
      * Creates new form ItemViewCustomer
      */
     public ItemViewCustomer() {
-       
+
     }
-    
+
     public ItemViewCustomer(int itemId) {
         this.itemId = itemId;
         initComponents();
-         setLocationRelativeTo(null);
-         loadItem();
+        setLocationRelativeTo(null);
+        loadItem();
     }
-    
+
     public void loadItem() {
         try {
-            ResultSet rs = new Dbcon().select("select * from items where id = "+ itemId);
-            if(rs.next()) {
+            String selectQuery = "SELECT retailer_items.id AS id, items.id AS item_id, retailer_items.quantity AS quantity, items.* FROM retailer_items, items WHERE retailer_items.id=" + itemId + " AND retailer_items.item_id = items.id  ";
+            ResultSet rs = new Dbcon().select(selectQuery);
+            if (rs.next()) {
                 String itemName = rs.getString("name");
                 System.out.println("name " + itemName);
 
                 item_name_1.setText(rs.getString("name"));
                 item_price_1.setText(rs.getString("price_apl"));
-                
-
+                jLabel1.setText(rs.getString("quantity"));
                 Blob imageBlob = rs.getBlob("image");
                 if (imageBlob != null) {
                     InputStream binaryStream = imageBlob.getBinaryStream(1, imageBlob.length());
@@ -85,6 +85,8 @@ public class ItemViewCustomer extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jSpinner1 = new javax.swing.JSpinner();
         item_price_1 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -116,76 +118,89 @@ public class ItemViewCustomer extends javax.swing.JFrame {
             }
         });
 
+        jSpinner1.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
         jSpinner1.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jSpinner1StateChanged(evt);
             }
         });
 
+        item_price_1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         item_price_1.setText("0");
+
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jLabel1.setText("0");
+
+        jLabel2.setText("Rs");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(98, 98, 98)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(289, 289, 289)
+                        .addGap(97, 97, 97)
                         .addComponent(item_name_1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(135, 135, 135)
+                        .addGap(41, 41, 41)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(photo_label_1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(35, 35, 35)
+                                .addComponent(item_price_1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel2))))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
                             .addComponent(jLabel6))
                         .addGap(39, 39, 39)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jSpinner1, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
-                            .addComponent(jTextField2)))
+                            .addComponent(jSpinner1)
+                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(192, 192, 192)
                         .addComponent(jButton1)
                         .addGap(87, 87, 87)
-                        .addComponent(jButton2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(233, 233, 233)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel3)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(item_price_1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(photo_label_1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(277, Short.MAX_VALUE))
+                        .addComponent(jButton2)))
+                .addContainerGap(121, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(78, 78, 78)
+                .addGap(41, 41, 41)
                 .addComponent(item_name_1)
                 .addGap(18, 18, 18)
                 .addComponent(photo_label_1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(item_price_1))
+                    .addComponent(item_price_1)
+                    .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel4)
-                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel1))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(42, 42, 42)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(jButton2)))
+                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(89, Short.MAX_VALUE))
+                .addGap(50, 50, 50)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
 
         pack();
@@ -193,21 +208,20 @@ public class ItemViewCustomer extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        MonthlyItemOrder monthlyItemOrder=new MonthlyItemOrder();
+        MonthlyItemOrder monthlyItemOrder = new MonthlyItemOrder();
         monthlyItemOrder.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
-        
         String userId = HomePageCustomer.userid;
         int quantity = Integer.parseInt(jSpinner1.getValue().toString());
         // itemId
-        
-        String query = "insert into user_cart (item_id, quantity, user_id) values ( "+itemId+", "+quantity+", "+userId+" )";
+
+        String query = "insert into user_cart (item_id, quantity, user_id) values ( " + itemId + ", " + quantity + ", " + userId + " )";
         int insert = new Dbcon().insert(query);
-        if(insert>0) {
+        if (insert > 0) {
             JOptionPane.showMessageDialog(rootPane, "Added to cart");
             MonthlyItemOrder monthlyItemOrder = new MonthlyItemOrder();
             monthlyItemOrder.setVisible(true);
@@ -221,7 +235,19 @@ public class ItemViewCustomer extends javax.swing.JFrame {
     private void jSpinner1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinner1StateChanged
 
         int quantity = Integer.parseInt(jSpinner1.getValue().toString());
-        
+        int availableQuantity = Integer.parseInt(jLabel1.getText().trim());
+        System.out.println("quantity " + quantity);
+
+        if (quantity > availableQuantity) {
+            JOptionPane.showMessageDialog(rootPane, "Sorry, Please enter quantity less than available quantiy");
+            jSpinner1.setValue(quantity - 1);
+        } else {
+
+            double amount = 0.0;
+            amount = Float.parseFloat(item_price_1.getText().trim()) * quantity;
+            jTextField2.setText(amount + "");
+        }
+
 // TODO add your handling code here:
     }//GEN-LAST:event_jSpinner1StateChanged
 
@@ -265,6 +291,8 @@ public class ItemViewCustomer extends javax.swing.JFrame {
     private javax.swing.JLabel item_price_1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

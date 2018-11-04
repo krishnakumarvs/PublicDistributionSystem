@@ -23,7 +23,7 @@ public class MonthlyItemOrder extends javax.swing.JFrame {
     int noItemsInPage = 4;
     int totalNoOfItems = 0;
     String searchName = "";
-    int itemId1,itemId2,itemId3,itemId4;
+    int itemId1, itemId2, itemId3, itemId4;
 
     /**
      * Creates new form MonthlyItemOrder
@@ -37,7 +37,8 @@ public class MonthlyItemOrder extends javax.swing.JFrame {
 
     public void checkTotalNoOfItems() {
         try {
-            ResultSet rs = new Dbcon().select("select count(*) from items where name like '%" + searchName + "%'");
+            String selectQuery = "SELECT count(*) FROM retailer_items, items WHERE retailer_id=" + HomePageCustomer.retailerId + " AND retailer_items.item_id = items.id AND items.monthly_item = TRUE AND items.name LIKE '%" + searchName + "%' ";
+            ResultSet rs = new Dbcon().select(selectQuery);
             if (rs.next()) {
                 totalNoOfItems = Integer.parseInt(rs.getString(1));
                 System.out.println("totalNoOfItems " + totalNoOfItems);
@@ -62,7 +63,7 @@ public class MonthlyItemOrder extends javax.swing.JFrame {
         photo_label_2.setIcon(null);
         photo_label_3.setIcon(null);
         photo_label_4.setIcon(null);
-        
+
         view_item_1.setVisible(false);
         view_item_2.setVisible(false);
         view_item_3.setVisible(false);
@@ -73,7 +74,9 @@ public class MonthlyItemOrder extends javax.swing.JFrame {
     public void loadAllItems() {
         clearAllItems();
         try {
-            ResultSet rs = new Dbcon().select("select * from items where name like '%" + searchName + "%'  limit " + ((currentPage - 1) * noItemsInPage) + " , " + noItemsInPage);
+            String selectQuery = "SELECT retailer_items.id AS id, items.id AS item_id, retailer_items.quantity AS quantity, items.* FROM retailer_items, items WHERE retailer_id=" + HomePageCustomer.retailerId + " AND retailer_items.item_id = items.id AND items.monthly_item = TRUE AND items.name LIKE '%" + searchName + "%' limit " + ((currentPage - 1) * noItemsInPage) + " , " + noItemsInPage;
+            System.out.println("selectQuery " + selectQuery);
+            ResultSet rs = new Dbcon().select(selectQuery);
 
             //1
             if (rs.next()) {
@@ -83,7 +86,7 @@ public class MonthlyItemOrder extends javax.swing.JFrame {
                 item_name_1.setText(rs.getString("name"));
                 item_price_1.setText(rs.getString("price_apl"));
                 itemId1 = Integer.parseInt(rs.getString("id"));
-                
+
                 Blob imageBlob = rs.getBlob("image");
                 if (imageBlob != null) {
                     InputStream binaryStream = imageBlob.getBinaryStream(1, imageBlob.length());
@@ -128,7 +131,7 @@ public class MonthlyItemOrder extends javax.swing.JFrame {
                 item_name_3.setText(rs.getString("name"));
                 item_price_3.setText(rs.getString("price_apl"));
                 itemId3 = Integer.parseInt(rs.getString("id"));
-                
+
                 Blob imageBlob = rs.getBlob("image");
                 if (imageBlob != null) {
                     InputStream binaryStream = imageBlob.getBinaryStream(1, imageBlob.length());
@@ -151,7 +154,7 @@ public class MonthlyItemOrder extends javax.swing.JFrame {
                 item_name_4.setText(rs.getString("name"));
                 item_price_4.setText(rs.getString("price_apl"));
                 itemId4 = Integer.parseInt(rs.getString("id"));
-                
+
                 Blob imageBlob = rs.getBlob("image");
                 if (imageBlob != null) {
                     InputStream binaryStream = imageBlob.getBinaryStream(1, imageBlob.length());
@@ -525,7 +528,7 @@ public class MonthlyItemOrder extends javax.swing.JFrame {
         ItemViewCustomer itemViewCustomer = new ItemViewCustomer(itemId2);
         itemViewCustomer.setVisible(true);
         this.dispose();
-        
+
         // TODO add your handling code here:
     }//GEN-LAST:event_view_item_2ActionPerformed
 
@@ -570,9 +573,9 @@ public class MonthlyItemOrder extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
         searchName = search_name.getText().trim();
+        currentPage = 1;
         checkTotalNoOfItems();
         loadAllItems();
-        currentPage = 0;
 
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed

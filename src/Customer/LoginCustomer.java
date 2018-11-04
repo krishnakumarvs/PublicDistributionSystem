@@ -53,7 +53,7 @@ public class LoginCustomer extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
         jLabel2.setText("User Name");
 
-        username_textfield.setText("monu");
+        username_textfield.setText("chandu");
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
         jLabel3.setText("Password");
@@ -194,7 +194,9 @@ public class LoginCustomer extends javax.swing.JFrame {
                 if (approved_status.equals("0")) {
                     JOptionPane.showMessageDialog(rootPane, "Your account is not approved yet. Please contact admin");
                 } else if (approved_status.equals("1")) {
-                    HomePageCustomer homePageCustomer = new HomePageCustomer(userid);
+                    HomePageCustomer homePageCustomer = new HomePageCustomer();
+                    HomePageCustomer.userid = userid;
+                    HomePageCustomer.retailerId = rs.getString("nearby_retailer");
                     homePageCustomer.setVisible(true);
                     this.dispose();
                 } else {

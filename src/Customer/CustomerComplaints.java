@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Customer;
 
 import db.Dbcon;
@@ -13,18 +12,13 @@ import db.Dbcon;
  * @author USER
  */
 public class CustomerComplaints extends javax.swing.JFrame {
-    String userid;
+
     /**
      * Creates new form CustomerComplaints
      */
     public CustomerComplaints() {
         initComponents();
-         //setLocationRelativeTo(null);
-    }
-    public CustomerComplaints(String userid) {
-        initComponents();
-         setLocationRelativeTo(null);
-         this.userid=userid;
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -156,31 +150,28 @@ public class CustomerComplaints extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
-        String complaints=complaints_textarea.getText().toString();
-        String comments=comments_textarea.getText().toString();
-        String orderinfo=orderinfo_text.getText().toString();
-        
-        String query="insert into complaints(created_user_id,description,comments,order_info) values('"+userid+"','"+complaints+"','"+comments+"','"+orderinfo+"')";
-        Dbcon dbcon=new Dbcon();
-        int rs=dbcon.insert(query);
-        if(rs!=0)
-        {
+
+        String complaints = complaints_textarea.getText().toString();
+        String comments = comments_textarea.getText().toString();
+        String orderinfo = orderinfo_text.getText().toString();
+
+        String query = "insert into complaints(created_user_id,description,comments,order_info) values('" + HomePageCustomer.userid + "','" + complaints + "','" + comments + "','" + orderinfo + "')";
+        Dbcon dbcon = new Dbcon();
+        int rs = dbcon.insert(query);
+        if (rs != 0) {
             System.out.println("inserted..");
-            HomePageCustomer homePageCustomer=new HomePageCustomer(userid);
+            HomePageCustomer homePageCustomer = new HomePageCustomer();
             homePageCustomer.setVisible(true);
             this.dispose();
-        }
-        else
-        {
+        } else {
             System.out.println("failed..");
         }
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        HomePageCustomer homePageCustomer=new HomePageCustomer();
+        HomePageCustomer homePageCustomer = new HomePageCustomer();
         homePageCustomer.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed

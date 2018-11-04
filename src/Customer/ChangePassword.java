@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Customer;
 
 import db.Dbcon;
@@ -15,22 +14,15 @@ import javax.swing.JOptionPane;
  * @author USER
  */
 public class ChangePassword extends javax.swing.JFrame {
-    String userid;
+
     /**
      * Creates new form ChangePassword
      */
-    
-   public ChangePassword() {
-        initComponents();
-         //setLocationRelativeTo(null);
-    }
-    
-     public ChangePassword(String userid) {
-        initComponents();
-         setLocationRelativeTo(null);
-         this.userid=userid;
-    }
 
+    public ChangePassword() {
+        initComponents();
+        setLocationRelativeTo(null);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -130,66 +122,51 @@ public class ChangePassword extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
-        String current_pwd=current_pwd_textfield.getText();
-        String new_pwd=new_pwd_textfield.getText();
-        String confirm_pwd=confirm_pwd_textfield.getText();
-        Dbcon dbcon=new Dbcon();
-        String query1="select password from user_details where id='"+userid+"' and user_type='customer'     `";
-        ResultSet rs1=dbcon.select(query1);
-        String password="";
-            try
-            {
-               
-                if(rs1.next())
-                {
-                 password= rs1.getString("id");
-                }
-                else
-                {
+
+        String current_pwd = current_pwd_textfield.getText();
+        String new_pwd = new_pwd_textfield.getText();
+        String confirm_pwd = confirm_pwd_textfield.getText();
+        Dbcon dbcon = new Dbcon();
+        String query1 = "select password from user_details where id='" + HomePageCustomer.userid + "' and user_type='customer'     `";
+        ResultSet rs1 = dbcon.select(query1);
+        String password = "";
+        try {
+
+            if (rs1.next()) {
+                password = rs1.getString("id");
+            } else {
                 //System.out.println("Invalid User...");
                 JOptionPane.showMessageDialog(rootPane, "Invalid query..");
-                }
-                            }
-            catch(Exception e)
-            {
+            }
+        } catch (Exception e) {
             System.out.println(e);
-            }
-     if(current_pwd.equals(password))
-     {
-        if(new_pwd.equals(confirm_pwd))
-        {
-            String query="update user_details set password='"+new_pwd+"'";
-            
-            int rs=dbcon.insert(query);
-            if(rs!=0)
-            {
-                JOptionPane.showMessageDialog(rootPane, "Password Successfully changed..");
-                HomePageCustomer homePageCustomer=new HomePageCustomer(userid);
-                homePageCustomer.setVisible(true);
-                this.dispose();
-            }
-            else
-            {
-                System.out.println("failed..");
-            }
         }
-        else
-        {
-            JOptionPane.showMessageDialog(rootPane, "Password not maching..");
+        if (current_pwd.equals(password)) {
+            if (new_pwd.equals(confirm_pwd)) {
+                String query = "update user_details set password='" + new_pwd + "'";
+
+                int rs = dbcon.insert(query);
+                if (rs != 0) {
+                    JOptionPane.showMessageDialog(rootPane, "Password Successfully changed..");
+                    HomePageCustomer homePageCustomer = new HomePageCustomer();
+                    homePageCustomer.setVisible(true);
+                    this.dispose();
+                } else {
+                    System.out.println("failed..");
+                }
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Password not maching..");
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Password not correct..");
         }
-        
-     }
-     else
-     {
-         JOptionPane.showMessageDialog(rootPane, "Password not correct..");
-     }
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        HomePageCustomer homePageCustomer=new HomePageCustomer();
+        HomePageCustomer homePageCustomer = new HomePageCustomer();
         homePageCustomer.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
