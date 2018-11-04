@@ -12,6 +12,8 @@ import java.io.File;
 import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.ImageIcon;
 
 /**
@@ -24,6 +26,9 @@ public class ViewCartItems extends javax.swing.JFrame {
     int noItemsInPage = 2;
     int totalNoOfItems = 0;
     int itemId1, itemId2;
+    String itemName1, itemName2;
+    float itemAmount1, itemAmount2;
+    int cartId1, cartId2;
 
     /**
      * Creates new form ViewCartItems
@@ -38,12 +43,12 @@ public class ViewCartItems extends javax.swing.JFrame {
 
     private void getTotalNoOfItems() {
         try {
-            ResultSet rs = new Dbcon().select("SELECT SUM(items.price_apl), COUNT(*) FROM user_cart AS cart , items WHERE cart.user_id = " + HomePageCustomer.userid + " AND cart.item_id = items.id");
-            if(rs.next()) {
+            ResultSet rs = new Dbcon().select("SELECT SUM(items.price_apl * cart.quantity), COUNT(*) FROM user_cart AS cart , items WHERE cart.user_id = " + HomePageCustomer.userid + " AND cart.item_id = items.id");
+            if (rs.next()) {
                 totalNoOfItems = Integer.parseInt(rs.getString(2));
                 jLabel11.setText(totalNoOfItems + "");
-                
-                jLabel15.setText(rs.getString(1));
+
+                total_cart_amount_label.setText(rs.getString(1));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -55,33 +60,30 @@ public class ViewCartItems extends javax.swing.JFrame {
         amountTotal = amount * quantity;
         return amountTotal;
     }
-    
+
     private void hideCarts() {
         //jPanel1.setVisible(false);
         //jPanel3.setVisible(false);
     }
-    
+
     private void clearAll() {
         jLabel2.setText("");
-        jLabel3.setText("");
-        jLabel4.setText("");
-        jLabel5.setText("");
+        item_price_label1.setText("");
+        quantity_label1.setText("");
+        amount_label1.setText("");
         // jLabel1.setIcon(null);
         jButton7.setVisible(false);
         jButton2.setVisible(false);
-        
-        
+
         jLabel8.setText("");
-        jLabel9.setText("");
-        jLabel10.setText("");
-        jLabel12.setText("");
+        item_price_label2.setText("");
+        quantity_label2.setText("");
+        amount_label2.setText("");
         // jLabel7.setIcon(null);
-        
+
         jButton8.setVisible(false);
         jButton3.setVisible(false);
-        
-        
-        
+
         String filePath = "img/default_item.png";
 
         Toolkit toolkit = Toolkit.getDefaultToolkit();
@@ -92,14 +94,11 @@ public class ViewCartItems extends javax.swing.JFrame {
             ImageIcon icon = new ImageIcon(sc);
             jLabel1.setIcon(icon);
             jLabel7.setIcon(icon);
-            
-            
+
         } catch (Exception e) {
             System.out.println(e);
         }
-        
-        
-        
+
     }
 
     public void loadCartItems() {
@@ -117,14 +116,15 @@ public class ViewCartItems extends javax.swing.JFrame {
                 System.out.println("name " + itemName);
 
                 jLabel2.setText(rs.getString("name"));
-                jLabel3.setText(rs.getString("price_apl"));
+                item_price_label1.setText(rs.getString("price_apl"));
                 itemId1 = Integer.parseInt(rs.getString("item_id"));
+                item_id_label1.setText(itemId1 + "");
 
                 int aplAmount = Integer.parseInt(rs.getString("price_apl"));
                 int quantity = Integer.parseInt(rs.getString("quantity"));
                 float totalAmount = calculateAmount(aplAmount, quantity);
-                jLabel5.setText(totalAmount + "");
-                jLabel4.setText(quantity + "");
+                amount_label1.setText(totalAmount + "");
+                quantity_label1.setText(quantity + "");
 
                 Blob imageBlob = rs.getBlob("image");
                 if (imageBlob != null) {
@@ -142,21 +142,22 @@ public class ViewCartItems extends javax.swing.JFrame {
                 jButton2.setVisible(true);
                 //view_item_1.setVisible(true);
             }
-            
+
             //2
             if (rs.next()) {
                 String itemName = rs.getString("name");
                 System.out.println("name " + itemName);
 
                 jLabel8.setText(rs.getString("name"));
-                jLabel9.setText(rs.getString("price_apl"));
+                item_price_label2.setText(rs.getString("price_apl"));
                 itemId2 = Integer.parseInt(rs.getString("item_id"));
+                item_id_label2.setText(itemId2 + "");
 
                 int aplAmount = Integer.parseInt(rs.getString("price_apl"));
                 int quantity = Integer.parseInt(rs.getString("quantity"));
                 float totalAmount = calculateAmount(aplAmount, quantity);
-                jLabel12.setText(totalAmount + "");
-                jLabel10.setText(quantity + "");
+                amount_label2.setText(totalAmount + "");
+                quantity_label2.setText(quantity + "");
 
                 Blob imageBlob = rs.getBlob("image");
                 if (imageBlob != null) {
@@ -170,12 +171,12 @@ public class ViewCartItems extends javax.swing.JFrame {
                     jLabel7.setIcon(iconScaled);
                 }
                 jPanel3.setVisible(true);
-                
+
                 jButton8.setVisible(true);
                 jButton3.setVisible(true);
                 //view_item_1.setVisible(true);
             }
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -196,7 +197,7 @@ public class ViewCartItems extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
+        total_cart_amount_label = new javax.swing.JLabel();
         jButton9 = new javax.swing.JButton();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
@@ -205,25 +206,29 @@ public class ViewCartItems extends javax.swing.JFrame {
         jLabel18 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        item_price_label1 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        quantity_label1 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        amount_label1 = new javax.swing.JLabel();
         jButton7 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jLabel22 = new javax.swing.JLabel();
+        item_id_label1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel32 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
+        item_price_label2 = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
+        quantity_label2 = new javax.swing.JLabel();
         jLabel34 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
+        amount_label2 = new javax.swing.JLabel();
         jButton8 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jLabel24 = new javax.swing.JLabel();
+        item_id_label2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -249,7 +254,7 @@ public class ViewCartItems extends javax.swing.JFrame {
 
         jLabel14.setText("Total Amount");
 
-        jLabel15.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        total_cart_amount_label.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jButton9.setText("Back");
         jButton9.addActionListener(new java.awt.event.ActionListener() {
@@ -284,15 +289,15 @@ public class ViewCartItems extends javax.swing.JFrame {
 
         jLabel19.setText("Price");
 
-        jLabel3.setText("Price");
+        item_price_label1.setText("Price");
 
         jLabel20.setText("Quantity");
 
-        jLabel4.setText("Quantity");
+        quantity_label1.setText("Quantity");
 
         jLabel21.setText("Amount");
 
-        jLabel5.setText("Amount");
+        amount_label1.setText("Amount");
 
         jButton7.setText("Buy Now");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
@@ -302,6 +307,10 @@ public class ViewCartItems extends javax.swing.JFrame {
         });
 
         jButton2.setText("Remove");
+
+        jLabel22.setText("Id");
+
+        item_id_label1.setText("0");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -314,21 +323,24 @@ public class ViewCartItems extends javax.swing.JFrame {
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel18)
                             .addComponent(jLabel19)
                             .addComponent(jLabel20)
-                            .addComponent(jLabel21))
+                            .addComponent(jLabel21)
+                            .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(26, 26, 26)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(item_price_label1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(amount_label1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 12, Short.MAX_VALUE))
-                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(quantity_label1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(item_id_label1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 12, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -343,15 +355,19 @@ public class ViewCartItems extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(item_price_label1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(quantity_label1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(amount_label1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel22)
+                            .addComponent(item_id_label1)))
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -368,15 +384,15 @@ public class ViewCartItems extends javax.swing.JFrame {
 
         jLabel32.setText("Price");
 
-        jLabel9.setText("Price");
+        item_price_label2.setText("Price");
 
         jLabel33.setText("Quantity");
 
-        jLabel10.setText("Quantity");
+        quantity_label2.setText("Quantity");
 
         jLabel34.setText("Amount");
 
-        jLabel12.setText("Amount");
+        amount_label2.setText("Amount");
 
         jButton8.setText("Buy Now");
         jButton8.addActionListener(new java.awt.event.ActionListener() {
@@ -386,6 +402,10 @@ public class ViewCartItems extends javax.swing.JFrame {
         });
 
         jButton3.setText("Remove");
+
+        jLabel24.setText("Id");
+
+        item_id_label2.setText("0");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -398,21 +418,24 @@ public class ViewCartItems extends javax.swing.JFrame {
                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel31)
                             .addComponent(jLabel32)
                             .addComponent(jLabel33)
-                            .addComponent(jLabel34))
+                            .addComponent(jLabel34)
+                            .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(26, 26, 26)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(item_price_label2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(amount_label2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 12, Short.MAX_VALUE))
-                            .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(quantity_label2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(item_id_label2, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 12, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -427,15 +450,19 @@ public class ViewCartItems extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(item_price_label2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(quantity_label2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(amount_label2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel24)
+                            .addComponent(item_id_label2)))
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -463,7 +490,7 @@ public class ViewCartItems extends javax.swing.JFrame {
                                 .addGap(83, 83, 83)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel14)
-                                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(total_cart_amount_label, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -496,7 +523,7 @@ public class ViewCartItems extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
-                    .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE))
+                    .addComponent(total_cart_amount_label, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -523,9 +550,40 @@ public class ViewCartItems extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        Payment payment = new Payment();
-        payment.setVisible(true);
-        this.dispose();
+
+        float totalAmount = Float.parseFloat(total_cart_amount_label.getText().trim());
+        String query = "SELECT cart.* ,items.id as item_id, items.name,items.image, items.monthly_price_apl FROM user_cart AS cart, items AS items WHERE cart.user_id= " + HomePageCustomer.userid + " AND cart.item_id=items.id  ";
+        System.out.println("query for findin cart items to delete " + query);
+        try {
+            ResultSet rs = new Dbcon().select(query);
+            String items = "", itemsQuantities = "", itemIds = "";
+            int itemsCount = 0;
+            List<Integer> myList = new ArrayList<Integer>();
+
+            while (rs.next()) {
+                items += rs.getString("name") + ",";
+                itemsQuantities += rs.getString("quantity") + ",";
+                itemIds += rs.getString("item_id") + ",";
+
+                myList.add(Integer.parseInt(rs.getString("id")));
+                System.out.println("adding  " + Integer.parseInt(rs.getString("id")) + " to cart items");
+
+                ++itemsCount;
+            }
+
+            PaymentCustomer payment = new PaymentCustomer(totalAmount, items, itemsQuantities, itemsCount, myList, itemIds);
+            payment.setVisible(true);
+            this.dispose();
+
+            //kakes
+//            Payment payment = new Payment();
+//            payment.setVisible(true);
+//            this.dispose();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -537,9 +595,16 @@ public class ViewCartItems extends javax.swing.JFrame {
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
-        Payment payment = new Payment();
-        payment.setVisible(true);
-        this.dispose();
+        try {
+            List<Integer> myList = new ArrayList<Integer>();
+            myList.add(cartId2);
+            PaymentCustomer payment = new PaymentCustomer(itemAmount1, itemName1, quantity_label1.getText(), 1, myList, item_id_label1.getText());
+            payment.setVisible(true);
+            this.dispose();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
@@ -568,12 +633,23 @@ public class ViewCartItems extends javax.swing.JFrame {
             ++currentPage;
             loadCartItems();
         }
-        
+
 // TODO add your handling code here:
     }//GEN-LAST:event_jLabel17MouseClicked
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        // TODO add your handling code here:
+
+        try {
+            List<Integer> myList = new ArrayList<Integer>();
+            myList.add(cartId2);
+            PaymentCustomer payment = new PaymentCustomer(itemAmount1, itemName1, quantity_label1.getText(), 1, myList, item_id_label2.getText());
+            payment.setVisible(true);
+            this.dispose();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+// TODO add your handling code here:
     }//GEN-LAST:event_jButton8ActionPerformed
 
     /**
@@ -612,6 +688,12 @@ public class ViewCartItems extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel amount_label1;
+    private javax.swing.JLabel amount_label2;
+    private javax.swing.JLabel item_id_label1;
+    private javax.swing.JLabel item_id_label2;
+    private javax.swing.JLabel item_price_label1;
+    private javax.swing.JLabel item_price_label2;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
@@ -620,12 +702,9 @@ public class ViewCartItems extends javax.swing.JFrame {
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
@@ -633,18 +712,19 @@ public class ViewCartItems extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JLabel quantity_label1;
+    private javax.swing.JLabel quantity_label2;
+    private javax.swing.JLabel total_cart_amount_label;
     // End of variables declaration//GEN-END:variables
 }

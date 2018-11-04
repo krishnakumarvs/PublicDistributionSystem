@@ -202,9 +202,10 @@ public class ViewItemsBooked extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        Payment payment=new Payment();
-        payment.setVisible(true);
-        this.dispose();
+        // kakes
+//        Payment payment=new Payment();
+//        payment.setVisible(true);
+//        this.dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     /**

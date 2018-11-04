@@ -24,6 +24,7 @@ public class MonthlyItemOrder extends javax.swing.JFrame {
     int totalNoOfItems = 0;
     String searchName = "";
     int itemId1, itemId2, itemId3, itemId4;
+    int realitemId1, realitemId2, realitemId3, realitemId4;
 
     /**
      * Creates new form MonthlyItemOrder
@@ -32,6 +33,7 @@ public class MonthlyItemOrder extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         checkTotalNoOfItems();
+        setTitle("Customer order items");
         loadAllItems();
     }
 
@@ -86,6 +88,7 @@ public class MonthlyItemOrder extends javax.swing.JFrame {
                 item_name_1.setText(rs.getString("name"));
                 item_price_1.setText(rs.getString("price_apl"));
                 itemId1 = Integer.parseInt(rs.getString("id"));
+                realitemId1 = Integer.parseInt(rs.getString("item_id"));
 
                 Blob imageBlob = rs.getBlob("image");
                 if (imageBlob != null) {
@@ -109,6 +112,7 @@ public class MonthlyItemOrder extends javax.swing.JFrame {
                 item_name_2.setText(rs.getString("name"));
                 item_price_2.setText(rs.getString("price_apl"));
                 itemId2 = Integer.parseInt(rs.getString("id"));
+                realitemId2 = Integer.parseInt(rs.getString("item_id"));
                 Blob imageBlob = rs.getBlob("image");
                 if (imageBlob != null) {
                     InputStream binaryStream = imageBlob.getBinaryStream(1, imageBlob.length());
@@ -131,6 +135,7 @@ public class MonthlyItemOrder extends javax.swing.JFrame {
                 item_name_3.setText(rs.getString("name"));
                 item_price_3.setText(rs.getString("price_apl"));
                 itemId3 = Integer.parseInt(rs.getString("id"));
+                realitemId3 = Integer.parseInt(rs.getString("item_id"));
 
                 Blob imageBlob = rs.getBlob("image");
                 if (imageBlob != null) {
@@ -154,6 +159,7 @@ public class MonthlyItemOrder extends javax.swing.JFrame {
                 item_name_4.setText(rs.getString("name"));
                 item_price_4.setText(rs.getString("price_apl"));
                 itemId4 = Integer.parseInt(rs.getString("id"));
+                realitemId4 = Integer.parseInt(rs.getString("item_id"));
 
                 Blob imageBlob = rs.getBlob("image");
                 if (imageBlob != null) {
@@ -512,7 +518,7 @@ public class MonthlyItemOrder extends javax.swing.JFrame {
 
     private void view_item_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_view_item_1ActionPerformed
         // TODO add your handling code here:
-        ItemViewCustomer itemViewCustomer = new ItemViewCustomer(itemId1);
+        ItemViewCustomer itemViewCustomer = new ItemViewCustomer(itemId1, realitemId1);
         itemViewCustomer.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_view_item_1ActionPerformed
@@ -525,7 +531,7 @@ public class MonthlyItemOrder extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void view_item_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_view_item_2ActionPerformed
-        ItemViewCustomer itemViewCustomer = new ItemViewCustomer(itemId2);
+        ItemViewCustomer itemViewCustomer = new ItemViewCustomer(itemId2,realitemId2);
         itemViewCustomer.setVisible(true);
         this.dispose();
 
@@ -535,7 +541,7 @@ public class MonthlyItemOrder extends javax.swing.JFrame {
     private void view_item_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_view_item_3ActionPerformed
 
         // TODO add your handling code here:
-        ItemViewCustomer itemViewCustomer = new ItemViewCustomer(itemId3);
+        ItemViewCustomer itemViewCustomer = new ItemViewCustomer(itemId3,realitemId3);
         itemViewCustomer.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_view_item_3ActionPerformed
@@ -543,7 +549,7 @@ public class MonthlyItemOrder extends javax.swing.JFrame {
     private void view_item_4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_view_item_4ActionPerformed
 
         // TODO add your handling code here:
-        ItemViewCustomer itemViewCustomer = new ItemViewCustomer(itemId4);
+        ItemViewCustomer itemViewCustomer = new ItemViewCustomer(itemId4, realitemId4);
         itemViewCustomer.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_view_item_4ActionPerformed

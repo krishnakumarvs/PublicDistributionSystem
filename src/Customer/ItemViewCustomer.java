@@ -20,6 +20,7 @@ import javax.swing.JOptionPane;
 public class ItemViewCustomer extends javax.swing.JFrame {
 
     int itemId = 0;
+    int realItemId;
 
     /**
      * Creates new form ItemViewCustomer
@@ -28,8 +29,9 @@ public class ItemViewCustomer extends javax.swing.JFrame {
 
     }
 
-    public ItemViewCustomer(int itemId) {
+    public ItemViewCustomer(int itemId, int realItemId) {
         this.itemId = itemId;
+        this.realItemId = realItemId;
         initComponents();
         setLocationRelativeTo(null);
         loadItem();
@@ -219,7 +221,7 @@ public class ItemViewCustomer extends javax.swing.JFrame {
         int quantity = Integer.parseInt(jSpinner1.getValue().toString());
         // itemId
 
-        String query = "insert into user_cart (item_id, quantity, user_id) values ( " + itemId + ", " + quantity + ", " + userId + " )";
+        String query = "insert into user_cart (item_id, quantity, user_id) values ( " + realItemId + ", " + quantity + ", " + userId + " )";
         int insert = new Dbcon().insert(query);
         if (insert > 0) {
             JOptionPane.showMessageDialog(rootPane, "Added to cart");
